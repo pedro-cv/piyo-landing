@@ -36,7 +36,12 @@ const og = origin && !origin.includes('piyo.example') ? new URL(`${base}og.jpg`,
     {og && <meta property="og:image" content={og} />}
     <meta property="og:locale" content="es_BO" />
     <meta name="twitter:card" content={og ? "summary_large_image" : "summary"} />
-    {preloadHero && <link rel="preload" as="image" href={`${base}hero-2048.jpg`} fetchpriority="high" />}
+    {preloadHero && (
+      <>
+        <link rel="preload" as="image" type="image/webp" media="(orientation: portrait)" imagesrcset={`${base}hero-portrait-720.webp 720w, ${base}hero-portrait-1080.webp 1080w`} imagesizes="max(100vw, 56.25vh)" fetchpriority="high" />
+        <link rel="preload" as="image" type="image/webp" media="(orientation: landscape)" imagesrcset={`${base}hero-1280.webp 1280w, ${base}hero-2048.webp 2048w`} imagesizes="max(100vw, 177.78vh)" fetchpriority="high" />
+      </>
+    )}
   </head>
   <body>
     <a class="skip" href="#que-es">Saltar al contenido</a>

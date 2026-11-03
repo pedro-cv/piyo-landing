@@ -1,7 +1,9 @@
 ---
 import site from '@/data/site.json';
 import SectionTitle from '@/components/SectionTitle.astro';
-import icon from '@/assets/app-icon-256.png';
+import icon32 from '@/assets/app-icon-32.webp';
+import icon64 from '@/assets/app-icon-64.webp';
+import icon96 from '@/assets/app-icon-96.webp';
 const year = new Date().getFullYear();
 const mailto = `mailto:${site.contact.email}?subject=${encodeURIComponent(site.contact.subject)}`;
 ---
@@ -13,7 +15,7 @@ const mailto = `mailto:${site.contact.email}?subject=${encodeURIComponent(site.c
     <div class="col links">
       <span class="label">La app</span>
       <a class="store" href={site.playStore.url || site.repos.app.url} target="_blank" rel="noopener">
-        <img class="icon" src={icon.src} width="28" height="28" alt="" loading="lazy" decoding="async" />
+        <img class="icon" src={icon64.src} srcset={`${icon32.src} 1x, ${icon64.src} 2x, ${icon96.src} 3x`} width="28" height="28" alt="" loading="lazy" decoding="async" />
         <span>{site.playStore.url ? site.playStore.label : site.playStore.soon}</span>
       </a>
       <span class="label">Repos</span>

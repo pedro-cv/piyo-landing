@@ -303,6 +303,12 @@ export function mountSeam(o: SeamOptions): () => void {
     photoTex.needsUpdate = true;
     layout();
     gsap.ticker.add(tick);
+    o.img.addEventListener('load', onPhoto);
+  };
+  // The hero <picture> swaps portrait/landscape crops on rotation: re-upload the texture and re-fit it.
+  const onPhoto = () => {
+    photoTex.needsUpdate = true;
+    layout();
   };
   if (o.img.complete && o.img.naturalWidth) void start();
   else o.img.addEventListener('load', () => void start(), { once: true });
@@ -319,6 +325,7 @@ export function mountSeam(o: SeamOptions): () => void {
 
   return () => {
     gsap.ticker.remove(tick);
+    o.img.removeEventListener('load', onPhoto);
     ro.disconnect();
     window.removeEventListener('resize', onResize);
     renderer.dispose();

@@ -1,9 +1,10 @@
 ---
 import site from '@/data/site.json';
-import piyo800 from '@/assets/piyo-cutout-800.png';
-import piyo400 from '@/assets/piyo-cutout-400.png';
-import icon512 from '@/assets/app-icon-512.png';
-import icon256 from '@/assets/app-icon-256.png';
+import piyo800 from '@/assets/piyo-cutout-800.webp';
+import piyo400 from '@/assets/piyo-cutout-400.webp';
+import icon56 from '@/assets/app-icon-56.webp';
+import icon112 from '@/assets/app-icon-112.webp';
+import icon168 from '@/assets/app-icon-168.webp';
 const cards = [
   { n: '01', title: 'Funciona sin internet', body: 'Las líneas, el planificador de viajes y tus favoritos viven en el teléfono. Buscar direcciones o bajar mapas nuevos sí necesita conexión, y la app lo dice sin vueltas.' },
   { n: '02', title: 'Sin cuenta, sin anuncios, sin rastreo', body: 'No hay registro ni analítica. Lo único que viaja al servidor es un identificador anónimo, con sal y hash, para evitar abusos en los reportes.' },
@@ -16,7 +17,7 @@ const tags = ['micros', 'trufis', 'ida y vuelta', 'transbordos', 'mapa propio'];
   <div class="top">
     <p class="label">Qué es</p>
     <a class="app-badge" href={site.playStore.url || site.repos.app.url} target="_blank" rel="noopener" aria-label={site.playStore.url ? 'Descargar piyo en Google Play' : 'piyo llega pronto a Google Play; abre el repositorio de la app'} data-rise>
-      <img class="app-icon" src={icon256.src} srcset={`${icon256.src} 256w, ${icon512.src} 512w`} sizes="56px" width={icon256.width} height={icon256.height} alt="" loading="lazy" decoding="async" />
+      <img class="app-icon" src={icon112.src} srcset={`${icon56.src} 1x, ${icon112.src} 2x, ${icon168.src} 3x`} width="56" height="56" alt="" loading="lazy" decoding="async" />
       <span class="app-badge-text">
         <span class="label">{site.playStore.url ? 'Descargar' : 'Próximamente'}</span>
         <span class="display app-badge-store">{site.playStore.label}</span>

@@ -24,3 +24,5 @@ jobs:
         run: npm run check
       - name: Build
         run: npm run build
+      - name: vercel.json is valid JSON
+        run: node -e "JSON.parse(require('fs').readFileSync('vercel.json', 'utf8'))"

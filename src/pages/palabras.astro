@@ -1,0 +1,380 @@
+---
+import Base from '@/layouts/Base.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import SectionTitle from '@/components/SectionTitle.astro';
+import data from '@/data/words.json';
+import site from '@/data/site.json';
+
+const words = data.words;
+const tags = Array.from(new Set(words.map((w) => w.tag))).sort();
+const tagLabel: Record<string, string> = {
+  gente: 'Gente',
+  comida: 'Comida',
+  naturaleza: 'Naturaleza',
+  expresion: 'Expresiones',
+  dicho: 'Dichos',
+  transporte: 'Transporte',
+  vida: 'Vida diaria',
+};
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const slug = (s: string) =>
+  s
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+---
+
+<Base title="Hablá camba · piyo" description="Palabras y dichos de Santa Cruz de la Sierra, cada uno con su significado y su traducción al inglés. Un diccionario abierto que cualquiera puede ampliar.">
+  <Header />
+  <main class="page" id="top">
+    <section class="section wrap hero-words">
+      <p class="label"><a href={base}>piyo</a> · Palabras</p>
+      <SectionTitle id="palabras-title" text="Hablá camba" />
+      <p class="lead" data-words>{words.length} palabras y dichos de Santa Cruz, con su significado y su traducción al inglés. Tocá una tarjeta para darla vuelta. Las palabras viven en un archivo abierto: si falta la tuya, mandá un pull request.</p>
+
+      <div class="daily card" data-daily>
+        <span class="label">Palabra del día</span>
+        <p class="display daily-word" data-daily-word>—</p>
+        <p class="daily-meaning" data-daily-meaning></p>
+        <p class="label daily-en" data-daily-en></p>
+        <div class="daily-actions">
+          <button class="btn" type="button" data-shuffle>
+            <span class="btn-label"><span>Otra palabra</span><span aria-hidden="true">Otra palabra</span></span>
+          </button>
+          <button class="btn" type="button" data-copy>
+            <span class="btn-label"><span>Copiar enlace</span><span aria-hidden="true">Copiar enlace</span></span>
+          </button>
+          <span class="muted" data-copied hidden>¡Listo, copiado!</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap tools" aria-label="Buscar y filtrar">
+      <label class="search">
+        <span class="label">Buscar</span>
+        <input type="search" placeholder="elay, cuñapé, piyo…" autocomplete="off" data-search />
+      </label>
+      <div class="filters" role="group" aria-label="Filtrar por tema">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">Todo <span class="count">{words.length}</span></button>
+        {tags.map((t) => (
+          <button class="chip" type="button" data-filter={t} aria-pressed="false">
+            {tagLabel[t] ?? t} <span class="count">{words.filter((w) => w.tag === t).length}</span>
+          </button>
+        ))}
+      </div>
+      <p class="label result" aria-live="polite" data-result></p>
+    </section>
+
+    <section class="wrap">
+      <ul class="deck" data-deck>
+        {words.map((w, i) => (
+          <li class="flip" id={slug(w.word)} data-card data-word={w.word} data-tag={w.tag} data-search-text={`${w.word} ${w.variant ?? ''} ${w.meaning_es} ${w.translation_en}`.toLowerCase()}>
+            <button class="flip-btn" type="button" aria-expanded="false" aria-controls={`m-${i}`}>
+              <span class="face front">
+                <span class="muted idx">({String(i + 1).padStart(2, '0')})</span>
+                <span class="display w">{w.word}</span>
+                {w.variant ? <span class="label variant">{w.variant}</span> : null}
+                <span class="label tag">{tagLabel[w.tag] ?? w.tag}</span>
+                <span class="hint label">Dar vuelta</span>
+              </span>
+              <span class="face back" id={`m-${i}`}>
+                <span class="label en">{w.translation_en}</span>
+                <span class="meaning">{w.meaning_es}</span>
+                <span class="label src">{w.type === 'phrase' ? 'Dicho' : 'Palabra'} · {w.source}</span>
+              </span>
+            </button>
+          </li>
+        ))}
+      </ul>
+      <p class="empty muted" data-empty hidden>Nada con esa búsqueda. Probá con otra palabra, o agregala con un pull request.</p>
+    </section>
+
+    <section class="section wrap sources">
+      <p class="label">Fuentes</p>
+      <ul class="src-list">
+        {Object.entries(data.sources).map(([k, s]) => (
+          <li><span class="label">{k}</span> <a href={s.url} target="_blank" rel="noopener">{s.title} ↗</a> · {s.credit}</li>
+        ))}
+      </ul>
+      <p class="muted">Los significados están redactados con nuestras palabras a partir de esas fuentes. Para agregar una palabra editá <a href={site.landing.editWords} target="_blank" rel="noopener"><code>src/data/words.json</code></a> en el <a href={site.landing.url} target="_blank" rel="noopener">repositorio de esta página ↗</a>. ¿No usás GitHub? Mandala a <a href={`mailto:${site.contact.email}?subject=${encodeURIComponent('Una palabra camba para piyo')}`}>{site.contact.email}</a>.</p>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .page {
+    padding-top: 72px;
+  }
+  .hero-words .lead {
+    margin-top: 24px;
+    max-width: 52ch;
+    font-size: clamp(1rem, 0.95rem + 0.5vw, 1.35rem);
+    line-height: 1.35;
+  }
+  .daily {
+    margin-top: clamp(32px, 5vw, 64px);
+    display: grid;
+    gap: 10px;
+    max-width: 720px;
+    background: var(--green-900);
+    color: var(--paper);
+    border-style: solid;
+  }
+  .daily-word {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    line-height: 0.95;
+  }
+  .daily-meaning {
+    max-width: 48ch;
+  }
+  .daily-en {
+    color: var(--green-300);
+  }
+  .daily-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-top: 8px;
+  }
+  .daily .btn {
+    border-color: rgb(244 241 232 / 0.5);
+    --btn-fg: var(--paper);
+  }
+  .tools {
+    display: grid;
+    gap: 16px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .search {
+    display: grid;
+    gap: 6px;
+    max-width: 420px;
+  }
+  .search input {
+    font: inherit;
+    font-size: 1rem;
+    color: inherit;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0.7em 0.9em;
+  }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.45em 0.9em;
+    font-size: var(--fs-label);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+  }
+  .chip[aria-pressed='true'] {
+    background: var(--green-900);
+    color: var(--paper);
+    border-color: var(--green-900);
+  }
+  .chip .count {
+    opacity: 0.6;
+    margin-left: 0.4em;
+  }
+  .result {
+    min-height: 1em;
+  }
+  .result:empty {
+    display: none;
+  }
+  .deck {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .flip {
+    perspective: 1200px;
+  }
+  .flip[hidden] {
+    display: none;
+  }
+  .flip-btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 0.8;
+    text-align: left;
+    transform-style: preserve-3d;
+    transition: transform 0.7s var(--ease-out);
+  }
+  .flip-btn[aria-expanded='true'] {
+    transform: rotateY(180deg);
+  }
+  .face {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    align-content: start;
+    gap: 6px;
+    padding: 18px;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+    backface-visibility: hidden;
+    background: var(--bg);
+  }
+  .back {
+    transform: rotateY(180deg);
+    background: var(--green-700);
+    color: var(--paper);
+    border-style: solid;
+    border-color: var(--green-700);
+  }
+  .w {
+    font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+    line-height: 1;
+    margin-top: 6px;
+    overflow-wrap: anywhere;
+  }
+  .variant,
+  .tag {
+    opacity: 0.7;
+  }
+  .hint {
+    position: absolute;
+    right: 14px;
+    bottom: 12px;
+    opacity: 0.55;
+  }
+  .en {
+    color: var(--green-300);
+  }
+  .meaning {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  .src {
+    position: absolute;
+    left: 18px;
+    bottom: 12px;
+    opacity: 0.6;
+  }
+  .flip.is-hit .front {
+    border-color: var(--green-500);
+    border-style: solid;
+  }
+  .empty {
+    margin-top: 24px;
+  }
+  .src-list {
+    display: grid;
+    gap: 8px;
+    margin: 12px 0 16px;
+  }
+  .src-list a {
+    border-bottom: 1px solid var(--line);
+  }
+  code {
+    font-family: inherit;
+    border: 1px solid var(--line-soft);
+    padding: 0 0.3em;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .flip-btn {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import { wordsIn } from '@/scripts/motion';
+  import data from '@/data/words.json';
+
+  const root = document.querySelector<HTMLElement>('.page')!;
+  const lead = root.querySelector<HTMLElement>('[data-words]');
+  if (lead) wordsIn(lead, 'top 95%', 0.02);
+
+  // Flip cards
+  const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-card]'));
+  cards.forEach((card) => {
+    const btn = card.querySelector<HTMLButtonElement>('.flip-btn')!;
+    btn.addEventListener('click', () => btn.setAttribute('aria-expanded', btn.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'));
+  });
+
+  // Search + filter
+  const input = root.querySelector<HTMLInputElement>('[data-search]')!;
+  const chips = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+  const result = root.querySelector<HTMLElement>('[data-result]')!;
+  const empty = root.querySelector<HTMLElement>('[data-empty]')!;
+  let tag = 'all';
+  const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  const apply = () => {
+    const q = norm(input.value.trim());
+    let shown = 0;
+    cards.forEach((c) => {
+      const ok = (tag === 'all' || c.dataset.tag === tag) && (!q || norm(c.dataset.searchText ?? '').includes(q));
+      c.hidden = !ok;
+      c.classList.toggle('is-hit', !!q && ok);
+      if (ok) shown++;
+    });
+    result.textContent = q || tag !== 'all' ? `${shown} de ${cards.length}` : '';
+    empty.hidden = shown > 0;
+  };
+  input.addEventListener('input', apply);
+  chips.forEach((ch) =>
+    ch.addEventListener('click', () => {
+      tag = ch.dataset.filter ?? 'all';
+      chips.forEach((c) => c.setAttribute('aria-pressed', c === ch ? 'true' : 'false'));
+      apply();
+    }),
+  );
+
+  // Word of the day: deterministic per day, shuffle on demand, deep-link with #slug
+  const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  const dailyWord = root.querySelector<HTMLElement>('[data-daily-word]')!;
+  const dailyMeaning = root.querySelector<HTMLElement>('[data-daily-meaning]')!;
+  const dailyEn = root.querySelector<HTMLElement>('[data-daily-en]')!;
+  const copied = root.querySelector<HTMLElement>('[data-copied]')!;
+  let current = 0;
+  const show = (i: number) => {
+    current = (i + data.words.length) % data.words.length;
+    const w = data.words[current];
+    dailyWord.textContent = w.word;
+    dailyMeaning.textContent = w.meaning_es;
+    dailyEn.textContent = w.translation_en;
+  };
+  const openFromHash = () => {
+    const i = data.words.findIndex((w) => slug(w.word) === decodeURIComponent(location.hash.slice(1)));
+    if (i < 0) return false;
+    show(i);
+    const card = document.getElementById(slug(data.words[i].word));
+    card?.querySelector<HTMLButtonElement>('.flip-btn')?.setAttribute('aria-expanded', 'true');
+    setTimeout(() => card?.scrollIntoView({ block: 'center' }), 300);
+    return true;
+  };
+  const dayIndex = Math.floor(Date.now() / 86400000) % data.words.length;
+  if (!openFromHash()) show(dayIndex);
+  window.addEventListener('hashchange', openFromHash);
+  root.querySelector('[data-shuffle]')!.addEventListener('click', () => {
+    let n = current;
+    while (n === current) n = Math.floor(Math.random() * data.words.length);
+    show(n);
+  });
+  root.querySelector('[data-copy]')!.addEventListener('click', async () => {
+    const url = `${location.origin}${location.pathname}#${slug(data.words[current].word)}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      copied.hidden = false;
+      setTimeout(() => (copied.hidden = true), 1800);
+    } catch {
+      prompt('Copiá este enlace', url);
+    }
+  });
+</script>

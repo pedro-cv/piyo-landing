@@ -1,0 +1,240 @@
+---
+import site from '@/data/site.json';
+import icon from '@/assets/app-icon-128.png';
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const links = [
+  { href: `${base}#que-es`, label: 'Qué es' },
+  { href: `${base}#aporta`, label: 'Aportá' },
+  { href: `${base}palabras`, label: 'Palabras' },
+  { href: `${base}#juga`, label: 'Jugá' },
+];
+---
+
+<header class="header wrap" data-header>
+  <a class="brand display" href={base} data-nav-item aria-label="piyo, inicio"><img class="brand-icon" src={icon.src} width="32" height="32" alt="" decoding="async" />piyo</a>
+  <nav class="nav" aria-label="Secciones">
+    <ul>
+      {links.map((l) => (
+        <li data-nav-item>
+          <a class="nav-link" href={l.href} data-scroll>
+            <span class="nav-label"><span>{l.label}</span><span aria-hidden="true">{l.label}</span></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+  <a class="btn btn--solid gh" href={site.repos.app.url} target="_blank" rel="noopener" data-nav-item>
+    <span class="btn-label"><span>GitHub</span><span aria-hidden="true">GitHub</span></span>
+    <span class="btn-arrow" aria-hidden="true">↗</span>
+  </a>
+  <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú" data-burger>
+    <span></span><span></span>
+  </button>
+</header>
+
+<div class="menu" id="menu" hidden data-menu>
+  <ul>
+    {links.map((l) => (
+      <li><a class="display" href={l.href} data-scroll data-menu-link>{l.label}</a></li>
+    ))}
+    <li><a class="display" href={site.repos.app.url} target="_blank" rel="noopener">GitHub ↗</a></li>
+  </ul>
+</div>
+
+<style>
+  .header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-block: 14px;
+    mix-blend-mode: normal;
+    color: var(--paper);
+  }
+  .header[data-on-paper] {
+    color: var(--fg);
+  }
+  .brand {
+    text-transform: none; /* the wordmark is lowercase */
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+  .brand-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--brand);
+    box-shadow: 0 0 0 2px var(--paper); /* keeps the mark readable on green */
+    padding: 3px;
+    object-fit: contain;
+  }
+  .nav ul {
+    display: flex;
+    gap: clamp(16px, 2.5vw, 36px);
+  }
+  .nav-link {
+    font-size: var(--fs-label);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .nav-link::before {
+    content: '[';
+  }
+  .nav-link::after {
+    content: ']';
+  }
+  .nav-label {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    line-height: 1.2;
+  }
+  .nav-label > span {
+    display: inline-block;
+    transition: transform 0.6s var(--ease-out);
+  }
+  .nav-label > span + span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateY(110%) rotate(12deg);
+    transform-origin: left top;
+    color: var(--green-300);
+  }
+  .nav-link:hover .nav-label > span:first-child {
+    transform: translateY(-110%);
+  }
+  .nav-link:hover .nav-label > span + span {
+    transform: translateY(0) rotate(0deg);
+  }
+  .gh {
+    display: none;
+  }
+  .burger {
+    display: grid;
+    gap: 5px;
+    width: 40px;
+    height: 36px;
+    place-content: center;
+  }
+  .burger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.4s var(--ease-out), opacity 0.3s;
+  }
+  .burger[aria-expanded='true'] span:first-child {
+    transform: translateY(3.5px) rotate(45deg);
+  }
+  .burger[aria-expanded='true'] span:last-child {
+    transform: translateY(-3.5px) rotate(-45deg);
+  }
+  .menu {
+    position: fixed;
+    inset: 0;
+    z-index: 49;
+    display: grid;
+    place-content: center;
+    background: var(--green-700);
+    color: var(--paper);
+    transform-origin: top right;
+    padding: var(--gutter);
+  }
+  .menu[hidden] {
+    display: none;
+  }
+  .menu ul {
+    display: grid;
+    gap: 0.25em;
+  }
+  .menu a {
+    font-size: clamp(2.5rem, 12vw, 5rem);
+    display: inline-block;
+  }
+  @media (width >= 1024px) {
+    .nav {
+      display: block;
+    }
+    .gh {
+      display: inline-flex;
+    }
+    .burger {
+      display: none;
+    }
+  }
+  @media (width < 1024px) {
+    .nav {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import { gsap, headerAutoHide, scrollTo, reduced, ScrollTrigger } from '@/scripts/motion';
+  const header = document.querySelector<HTMLElement>('[data-header]')!;
+  const burger = document.querySelector<HTMLButtonElement>('[data-burger]')!;
+  const menu = document.querySelector<HTMLElement>('[data-menu]')!;
+
+  headerAutoHide(header);
+
+  // Header turns dark once the hero (dark photo) has scrolled past.
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  if (!hero) header.setAttribute('data-on-paper', ''); // pages without the dark hero start with dark text
+  if (hero) {
+    ScrollTrigger.create({
+      trigger: hero,
+      start: 'bottom 60px',
+      onEnter: () => header.setAttribute('data-on-paper', ''),
+      onLeaveBack: () => header.removeAttribute('data-on-paper'),
+    });
+  }
+
+  document.querySelectorAll<HTMLAnchorElement>('[data-scroll]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href') ?? '';
+      const hash = href.includes('#') ? href.slice(href.indexOf('#')) : '';
+      const path = href.includes('#') ? href.slice(0, href.indexOf('#')) : href;
+      const here = location.pathname.replace(/\/$/, '') === path.replace(/\/$/, '');
+      if (!hash || !here || !document.querySelector(hash)) return; // let the browser navigate
+      e.preventDefault();
+      closeMenu();
+      scrollTo(hash, 1);
+      history.replaceState(null, '', hash);
+    });
+  });
+
+  let open = false;
+  const lenis = () => window.__piyoMotion?.lenis;
+  function openMenu() {
+    open = true;
+    menu.hidden = false;
+    burger.setAttribute('aria-expanded', 'true');
+    burger.setAttribute('aria-label', 'Cerrar menú');
+    lenis()?.stop();
+    if (reduced) return;
+    gsap.fromTo(menu, { rotate: -28, autoAlpha: 0 }, { rotate: 0, autoAlpha: 1, duration: 0.8, ease: 'power4.out' });
+    gsap.fromTo(menu.querySelectorAll('li'), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, stagger: 0.1, ease: 'power4.out', delay: 0.1 });
+  }
+  function closeMenu() {
+    if (!open) return;
+    open = false;
+    burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', 'Abrir menú');
+    lenis()?.start();
+    if (reduced) {
+      menu.hidden = true;
+      return;
+    }
+    gsap.to(menu, { autoAlpha: 0, duration: 0.3, onComplete: () => (menu.hidden = true) });
+  }
+  burger.addEventListener('click', () => (open ? closeMenu() : openMenu()));
+  document.addEventListener('keydown', (e) => e.key === 'Escape' && closeMenu());
+</script>

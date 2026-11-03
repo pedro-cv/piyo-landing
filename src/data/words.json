@@ -1,0 +1,356 @@
+{
+  "$comment": "Camba vocabulary: hero seam, the Palabras teaser and the /palabras page. One entry per word: word, meaning_es (short paraphrase, never copied), translation_en, type word|phrase, tag (gente|comida|naturaleza|expresion|dicho|transporte|vida), source key from `sources`. Keep it family-friendly.",
+  "credit": "Vocabulario según H. Sanabria Fernández (1997) y H. J. Suárez Perrogón (2018), vía soysantacruz.com.bo",
+  "words": [
+    {
+      "word": "piyo",
+      "variant": "piyu",
+      "meaning_es": "El ñandú, el ave corredora de las pampas cruceñas. El diccionario lo llama «avestruz».",
+      "translation_en": "greater rhea",
+      "type": "word",
+      "tag": "naturaleza",
+      "source": "DI-01"
+    },
+    {
+      "word": "camba",
+      "meaning_es": "Gente de Santa Cruz y del oriente boliviano. Viene del guaraní: amigo.",
+      "translation_en": "Santa Cruz local; friend",
+      "type": "word",
+      "tag": "gente",
+      "source": "DI-01"
+    },
+    {
+      "word": "elay",
+      "variant": "¡helay che!",
+      "meaning_es": "¡Mirá! Exclamación de sorpresa o de «te lo dije».",
+      "translation_en": "look at that!",
+      "type": "phrase",
+      "tag": "expresion",
+      "source": "DI-01"
+    },
+    {
+      "word": "pue",
+      "meaning_es": "Sí, pues. Confirmación corta que cierra cualquier frase.",
+      "translation_en": "yep, sure",
+      "type": "word",
+      "tag": "expresion",
+      "source": "DI-01"
+    },
+    {
+      "word": "che",
+      "meaning_es": "Para llamar o dirigirse a alguien, con confianza.",
+      "translation_en": "hey, buddy",
+      "type": "word",
+      "tag": "expresion",
+      "source": "DI-01"
+    },
+    {
+      "word": "jichi",
+      "meaning_es": "Quien domina un oficio. También el espíritu que cuida las aguas.",
+      "translation_en": "expert; water spirit",
+      "type": "word",
+      "tag": "gente",
+      "source": "DI-01"
+    },
+    {
+      "word": "cuñapé",
+      "meaning_es": "Pancito de almidón de yuca y queso, mitad y mitad.",
+      "translation_en": "cheese bread roll",
+      "type": "word",
+      "tag": "comida",
+      "source": "DI-01"
+    },
+    {
+      "word": "motacú",
+      "meaning_es": "Palmera alta y fuerte de fruto comestible; de ella sale el palmito.",
+      "translation_en": "motacú palm",
+      "type": "word",
+      "tag": "naturaleza",
+      "source": "DI-01"
+    },
+    {
+      "word": "bibosi",
+      "meaning_es": "Higuera gigante que abraza otros árboles; a veces crece sobre el motacú.",
+      "translation_en": "strangler fig",
+      "type": "word",
+      "tag": "naturaleza",
+      "source": "DI-01"
+    },
+    {
+      "word": "totaí",
+      "meaning_es": "Palmera de tronco alto y copa erguida, típica del paisaje cruceño.",
+      "translation_en": "totaí palm",
+      "type": "word",
+      "tag": "naturaleza",
+      "source": "DI-01"
+    },
+    {
+      "word": "tiluchi",
+      "meaning_es": "El hornero: pajarito que levanta su casa de barro en los postes.",
+      "translation_en": "ovenbird",
+      "type": "word",
+      "tag": "naturaleza",
+      "source": "DI-01"
+    },
+    {
+      "word": "paraba",
+      "meaning_es": "Ave grande de la familia del loro, de colores vivos.",
+      "translation_en": "macaw",
+      "type": "word",
+      "tag": "naturaleza",
+      "source": "DI-01"
+    },
+    {
+      "word": "achachairú",
+      "meaning_es": "Fruta agridulce de un árbol nativo; se come en verano.",
+      "translation_en": "achachairú fruit",
+      "type": "word",
+      "tag": "comida",
+      "source": "DI-01"
+    },
+    {
+      "word": "guapurú",
+      "meaning_es": "Fruta negra, dulce y ácida, que crece pegada al tronco.",
+      "translation_en": "jabuticaba",
+      "type": "word",
+      "tag": "comida",
+      "source": "DI-01"
+    },
+    {
+      "word": "tutuma",
+      "meaning_es": "Vaso hecho de una calabaza partida, para tomar agua o chicha.",
+      "translation_en": "gourd cup",
+      "type": "word",
+      "tag": "vida",
+      "source": "DI-01"
+    },
+    {
+      "word": "apurarse",
+      "meaning_es": "Ir rápido, moverse ya. Lo que hace un piyo cuando corre.",
+      "translation_en": "hurry up",
+      "type": "word",
+      "tag": "transporte",
+      "source": "DI-01"
+    },
+    {
+      "word": "Échele",
+      "meaning_es": "Palabra de ánimo para que alguien se ponga a hacer algo.",
+      "translation_en": "Go for it",
+      "type": "word",
+      "tag": "expresion",
+      "source": "DI-03"
+    },
+    {
+      "word": "Taita",
+      "meaning_es": "Forma cariñosa de llamar al abuelo o al padre.",
+      "translation_en": "Grandpa, dad",
+      "type": "word",
+      "tag": "gente",
+      "source": "DI-03"
+    },
+    {
+      "word": "Peta",
+      "meaning_es": "Tortuga; también quien camina muy despacio.",
+      "translation_en": "Turtle; slowpoke",
+      "type": "word",
+      "tag": "gente",
+      "source": "DI-03"
+    },
+    {
+      "word": "Toborochi",
+      "meaning_es": "Árbol de tronco abultado y flor rosada, emblema cruceño.",
+      "translation_en": "Silk floss tree",
+      "type": "word",
+      "tag": "naturaleza",
+      "source": "DI-03"
+    },
+    {
+      "word": "Pororó",
+      "meaning_es": "Maíz reventado; también quien habla sin parar.",
+      "translation_en": "Popcorn; chatterbox",
+      "type": "word",
+      "tag": "comida",
+      "source": "DI-03"
+    },
+    {
+      "word": "Masaco",
+      "meaning_es": "Yuca o plátano machacado en tacú con queso o charque.",
+      "translation_en": "Mashed cassava dish",
+      "type": "word",
+      "tag": "comida",
+      "source": "DI-03"
+    },
+    {
+      "word": "Somó",
+      "meaning_es": "Bebida refrescante hecha con maíz blanco.",
+      "translation_en": "White corn drink",
+      "type": "word",
+      "tag": "comida",
+      "source": "DI-03"
+    },
+    {
+      "word": "Jenecherú",
+      "meaning_es": "Tronco grueso que arde toda la noche para tener fuego al amanecer.",
+      "translation_en": "Overnight ember log",
+      "type": "word",
+      "tag": "vida",
+      "source": "DI-03"
+    },
+    {
+      "word": "Tacú",
+      "meaning_es": "Mortero grande de madera para moler alimentos.",
+      "translation_en": "Wooden mortar",
+      "type": "word",
+      "tag": "vida",
+      "source": "DI-03"
+    },
+    {
+      "word": "Pahuichi",
+      "meaning_es": "Casita rústica techada con hojas de motacú.",
+      "translation_en": "Rustic palm hut",
+      "type": "word",
+      "tag": "vida",
+      "source": "DI-03"
+    },
+    {
+      "word": "Buri",
+      "meaning_es": "Fiesta campestre al estilo camba.",
+      "translation_en": "Country party",
+      "type": "word",
+      "tag": "vida",
+      "source": "DI-03"
+    },
+    {
+      "word": "Carretón",
+      "meaning_es": "Carreta grande tirada por bueyes.",
+      "translation_en": "Ox cart",
+      "type": "word",
+      "tag": "transporte",
+      "source": "DI-03"
+    },
+    {
+      "word": "Abubuya",
+      "meaning_es": "Canoa que avanza llevada por la corriente, sin remar.",
+      "translation_en": "Drifting canoe",
+      "type": "word",
+      "tag": "transporte",
+      "source": "DI-03"
+    },
+    {
+      "word": "Como piyo contra el cerco",
+      "meaning_es": "Estar desorientado, sin saber qué hacer.",
+      "translation_en": "Stuck, clueless",
+      "type": "phrase",
+      "tag": "dicho",
+      "source": "DI-03"
+    },
+    {
+      "word": "Como bibosi en motacú",
+      "meaning_es": "Pareja de enamorados muy abrazados.",
+      "translation_en": "Lovers tightly embraced",
+      "type": "phrase",
+      "tag": "dicho",
+      "source": "DI-03"
+    },
+    {
+      "word": "Más contento que un tiluchi cuando pasa el aguacero",
+      "meaning_es": "Alguien feliz porque le ocurrió algo bueno.",
+      "translation_en": "Happy as a bird after rain",
+      "type": "phrase",
+      "tag": "dicho",
+      "source": "DI-03"
+    },
+    {
+      "word": "Del palo la astilla, del totaí la penga",
+      "meaning_es": "El hijo sale igualito al padre.",
+      "translation_en": "Like father, like son",
+      "type": "phrase",
+      "tag": "dicho",
+      "source": "DI-03"
+    },
+    {
+      "word": "Hijo de tigre nace pintao",
+      "meaning_es": "Los hijos heredan las mañas de los padres.",
+      "translation_en": "Kids take after parents",
+      "type": "phrase",
+      "tag": "dicho",
+      "source": "DI-03"
+    },
+    {
+      "word": "Como con chuturubíes en el bolsillo",
+      "meaning_es": "Persona a la que le cuesta soltar la plata.",
+      "translation_en": "Tight with money",
+      "type": "phrase",
+      "tag": "dicho",
+      "source": "DI-03"
+    },
+    {
+      "word": "Al mal tiempo, buena cara",
+      "meaning_es": "No hay que dejarse abatir por los problemas.",
+      "translation_en": "Keep smiling through trouble",
+      "type": "phrase",
+      "tag": "dicho",
+      "source": "DI-03"
+    },
+    {
+      "word": "Se le cayó el cielo en agua",
+      "meaning_es": "Lluvia repentina y muy fuerte.",
+      "translation_en": "Sudden downpour",
+      "type": "phrase",
+      "tag": "dicho",
+      "source": "DI-03"
+    },
+    {
+      "word": "Surazo en vaso",
+      "meaning_es": "Forma jocosa de llamar al helado (el surazo es el viento frío del sur).",
+      "translation_en": "Ice cream, jokingly",
+      "type": "phrase",
+      "tag": "dicho",
+      "source": "DI-03"
+    },
+    {
+      "word": "Sol en botella",
+      "meaning_es": "Nombre ingenioso para el foco de luz eléctrica.",
+      "translation_en": "Light bulb",
+      "type": "phrase",
+      "tag": "dicho",
+      "source": "DI-03"
+    },
+    {
+      "word": "Tras el pucho la escupida",
+      "meaning_es": "Las cosas hay que hacerlas de inmediato.",
+      "translation_en": "Do it right away",
+      "type": "phrase",
+      "tag": "dicho",
+      "source": "DI-03"
+    },
+    {
+      "word": "Mala pata",
+      "meaning_es": "Tener mala suerte.",
+      "translation_en": "Bad luck",
+      "type": "phrase",
+      "tag": "expresion",
+      "source": "DI-03"
+    },
+    {
+      "word": "¡Juera flete!",
+      "meaning_es": "Exclamación de admiración.",
+      "translation_en": "Wow, amazing!",
+      "type": "phrase",
+      "tag": "expresion",
+      "source": "DI-03"
+    }
+  ],
+  "sources": {
+    "DI-01": {
+      "title": "Palabras, Frases y Modismos",
+      "credit": "H. Sanabria Fernández, El habla popular de Santa Cruz (1997)",
+      "url": "https://www.soysantacruz.com.bo/SSCB_Contenidos.php?CualForAux=hablapopular&CualBasAux=sscb&CualTabAux=hablapopular&CualOpcAux=14&CualSubOpcAux=DI-01_Palabras-Frases-y-Modismos"
+    },
+    "DI-03": {
+      "title": "Palabras y Dichos",
+      "credit": "Hugo Jesús Suárez Perrogón, Así se habla en mi Tierra (2018)",
+      "url": "https://soysantacruz.com.bo/SSCB_Contenidos.php?CualForAux=hablapopular&CualBasAux=sscb&CualTabAux=hablapopular&CualOpcAux=14&CualSubOpcAux=DI-03_Palabras-y-Dichos."
+    }
+  }
+}

@@ -1,0 +1,28 @@
+---
+import Base from '@/layouts/Base.astro';
+import Header from '@/components/Header.astro';
+import Hero from '@/components/Hero.astro';
+import Manifesto from '@/components/Manifesto.astro';
+import Gallery from '@/components/Gallery.astro';
+import Contribute from '@/components/Contribute.astro';
+import Words from '@/components/Words.astro';
+import Game from '@/components/Game.astro';
+import Footer from '@/components/Footer.astro';
+import PixelGrid from '@/components/PixelGrid.astro';
+---
+
+<Base preloadHero>
+  <Header />
+  <main>
+    <Hero />
+    <Manifesto />
+    <Gallery />
+    <PixelGrid from="var(--paper)" to="var(--green-900)" />
+    <Contribute />
+    <PixelGrid from="var(--green-900)" to="var(--paper)" />
+    <Words />
+    <Game />
+    <PixelGrid from="var(--paper)" to="var(--green-700)" accents="var(--terracotta),var(--green-300)" />
+  </main>
+  <Footer />
+</Base>

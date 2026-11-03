@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.playwright-mcp/
+npm-debug.log*
+.DS_Store
+.env
+.env.*
+!.env.example
+.screenshots/
+.claude/settings.local.json

@@ -1,0 +1,115 @@
+---
+import site from '@/data/site.json';
+import SectionTitle from '@/components/SectionTitle.astro';
+import icon from '@/assets/app-icon-256.png';
+const year = new Date().getFullYear();
+const mailto = `mailto:${site.contact.email}?subject=${encodeURIComponent(site.contact.subject)}`;
+---
+
+<footer class="footer theme-dark wrap" id="contacto">
+  <p class="label">Sumate</p>
+  <SectionTitle id="sumate-title" text="Sumate" size="big" />
+  <div class="grid-12 meta">
+    <div class="col links">
+      <span class="label">La app</span>
+      <a class="store" href={site.playStore.url || site.repos.app.url} target="_blank" rel="noopener">
+        <img class="icon" src={icon.src} width="28" height="28" alt="" loading="lazy" decoding="async" />
+        <span>{site.playStore.url ? site.playStore.label : site.playStore.soon}</span>
+      </a>
+      <span class="label">Repos</span>
+      <a href={site.repos.app.url} target="_blank" rel="noopener">{site.repos.app.label} ↗</a>
+      <a href={site.repos.backend.url} target="_blank" rel="noopener">{site.repos.backend.label} ↗</a>
+      <span class="label">Esta página</span>
+      <a href={site.landing.url} target="_blank" rel="noopener">{site.landing.label} ↗</a>
+    </div>
+    <div class="col links">
+      <span class="label">Contacto</span>
+      <span class="muted">¿No usás GitHub? Escribinos y te respondemos.</span>
+      <a href={mailto}>{site.contact.email}</a>
+    </div>
+    <div class="col">
+      <span class="label">Licencias</span>
+      <span>Código: {site.licenses.code}</span>
+      <span>{site.licenses.map}</span>
+    </div>
+    <div class="col">
+      <span class="label">Fotos</span>
+      <span>{site.images.map((i) => i.credit).filter((v, i, a) => a.indexOf(v) === i).join(' · ')}</span>
+      <span class="muted">Se usan con crédito. Si una es tuya y preferís que no esté, escribinos o abrí un issue.</span>
+    </div>
+    <div class="col">
+      <span class="label">Vocabulario</span>
+      <span>H. Sanabria Fernández, <em>El habla popular de Santa Cruz</em> (1997), vía soysantacruz.com.bo</span>
+    </div>
+  </div>
+  <div class="bottom">
+    <span>Hecho en Santa Cruz de la Sierra · {year}</span>
+    <a href="#top" data-scroll class="label">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--green-700);
+    color: var(--paper);
+    padding-block: clamp(64px, 10vw, 160px) 32px;
+  }
+  .meta {
+    margin-top: clamp(40px, 6vw, 96px);
+    row-gap: 28px;
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+  }
+  .col {
+    grid-column: span 12;
+    display: grid;
+    gap: 6px;
+    align-content: start;
+  }
+  .links a {
+    border-bottom: 1px solid var(--line);
+    width: max-content;
+  }
+  .store {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 0 !important;
+    margin-bottom: 10px;
+  }
+  .store .icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--brand);
+    box-shadow: 0 0 0 2px var(--paper);
+    padding: 3px;
+    object-fit: contain;
+  }
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: clamp(40px, 6vw, 96px);
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: var(--fs-label);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  @media (width >= 640px) {
+    .col {
+      grid-column: span 6;
+    }
+  }
+  @media (width >= 1024px) {
+    /* five columns: app + repos, contact, licences, photos, vocabulary */
+    .meta {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .col {
+      grid-column: auto;
+    }
+  }
+</style>
+

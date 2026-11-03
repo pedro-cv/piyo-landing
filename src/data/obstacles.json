@@ -1,0 +1,69 @@
+{
+  "$comment": "Obstacles for the runner game. kind: ground | air. sprite must exist in src/scripts/sprites.ts (an _1/_2 pair animates). Add an entry and a sprite to add an obstacle. toborochi is a common name not listed in the vocabulary source.",
+  "obstacles": [
+    {
+      "name": "motacú",
+      "en": "motacú palm",
+      "article": "un",
+      "kind": "ground",
+      "sprite": "motacu",
+      "weight": 3
+    },
+    {
+      "name": "totaí",
+      "en": "totaí palm",
+      "article": "un",
+      "kind": "ground",
+      "sprite": "totai",
+      "weight": 3
+    },
+    {
+      "name": "toborochi",
+      "en": "silk floss tree",
+      "article": "un",
+      "kind": "ground",
+      "sprite": "toborochi",
+      "weight": 2
+    },
+    {
+      "name": "tatú",
+      "en": "armadillo",
+      "article": "un",
+      "kind": "ground",
+      "sprite": "tatu",
+      "weight": 3
+    },
+    {
+      "name": "sicurí",
+      "en": "anaconda",
+      "article": "una",
+      "kind": "ground",
+      "sprite": "sicuri",
+      "weight": 2
+    },
+    {
+      "name": "paraba",
+      "en": "macaw",
+      "article": "una",
+      "kind": "air",
+      "sprite": "paraba",
+      "weight": 2
+    },
+    {
+      "name": "tiluchi",
+      "en": "ovenbird",
+      "article": "un",
+      "kind": "air",
+      "sprite": "tiluchi",
+      "weight": 2
+    },
+    {
+      "name": "chuturubí",
+      "en": "fierce wasp",
+      "article": "un",
+      "kind": "air",
+      "sprite": "chuturubi",
+      "weight": 1
+    }
+  ]
+}

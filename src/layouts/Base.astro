@@ -1,0 +1,65 @@
+---
+import '@fontsource/anton';
+import '@fontsource-variable/kode-mono';
+import '@/styles/global.css';
+import site from '@/data/site.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  preloadHero?: boolean;
+}
+const { title = `${site.name} — ${site.tagline}`, description = site.description, preloadHero = false } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+// og:image needs an absolute URL: only emitted when PUBLIC_SITE is set at build time.
+const origin = Astro.site?.toString();
+const og = origin && !origin.includes('piyo.example') ? new URL(`${base}og.jpg`, origin).toString() : null;
+---
+
+<!doctype html>
+<html lang="es-BO">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#2a6a47" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" href={`${base}favicon-32.png`} sizes="32x32" type="image/png" />
+    <link rel="icon" href={`${base}favicon-48.png`} sizes="48x48" type="image/png" />
+    <link rel="icon" href={`${base}icon-192.png`} sizes="192x192" type="image/png" />
+    <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
+    <link rel="manifest" href={`${base}site.webmanifest`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {og && <meta property="og:image" content={og} />}
+    <meta property="og:locale" content="es_BO" />
+    <meta name="twitter:card" content={og ? "summary_large_image" : "summary"} />
+    {preloadHero && <link rel="preload" as="image" href={`${base}hero-2048.jpg`} fetchpriority="high" />}
+  </head>
+  <body>
+    <a class="skip" href="#que-es">Saltar al contenido</a>
+    <slot />
+    <script>
+      import { initMotion } from '@/scripts/motion';
+      initMotion();
+    </script>
+  </body>
+</html>
+
+<style>
+  .skip {
+    position: absolute;
+    left: var(--gutter);
+    top: -100px;
+    z-index: 100;
+    padding: 0.5em 0.75em;
+    background: var(--green-900);
+    color: var(--paper);
+    font-size: var(--fs-label);
+  }
+  .skip:focus {
+    top: 8px;
+  }
+</style>

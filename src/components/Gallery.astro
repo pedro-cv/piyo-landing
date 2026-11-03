@@ -1,0 +1,126 @@
+---
+import site from '@/data/site.json';
+import SectionTitle from '@/components/SectionTitle.astro';
+import skyline1600 from '@/assets/city-skyline-1600.webp';
+import skyline1000 from '@/assets/city-skyline-1000.webp';
+import skyline600 from '@/assets/city-skyline-600.webp';
+import persp1200 from '@/assets/city-perspective-1200.webp';
+import persp800 from '@/assets/city-perspective-800.webp';
+import persp500 from '@/assets/city-perspective-500.webp';
+import aerial960 from '@/assets/city-aerial-960.webp';
+import aerial640 from '@/assets/city-aerial-640.webp';
+import aerial400 from '@/assets/city-aerial-400.webp';
+import sign1600 from '@/assets/city-sign-1600.webp';
+import sign1000 from '@/assets/city-sign-1000.webp';
+import sign600 from '@/assets/city-sign-600.webp';
+
+const meta = Object.fromEntries(site.images.map((i) => [i.id, i]));
+const items = [
+  { id: 'city-skyline', src: skyline1000, set: `${skyline600.src} 600w, ${skyline1000.src} 1000w, ${skyline1600.src} 1600w`, area: 'a', ratio: '16 / 9' },
+  { id: 'city-aerial', src: aerial640, set: `${aerial400.src} 400w, ${aerial640.src} 640w, ${aerial960.src} 960w`, area: 'b', ratio: '1 / 1' },
+  { id: 'city-perspective', src: persp800, set: `${persp500.src} 500w, ${persp800.src} 800w, ${persp1200.src} 1200w`, area: 'c', ratio: '16 / 10' },
+  { id: 'city-sign', src: sign1000, set: `${sign600.src} 600w, ${sign1000.src} 1000w, ${sign1600.src} 1600w`, area: 'd', ratio: '3 / 2' },
+];
+---
+
+<section class="section wrap" id="ciudad" aria-labelledby="ciudad-title">
+  <div class="head">
+    <p class="label">La ciudad</p>
+    <SectionTitle id="ciudad-title" text="Santa Cruz en anillos" />
+    <p class="muted note">Dos millones de personas, micros sin paradas fijas ni horarios. Por eso piyo existe.</p>
+  </div>
+
+  <ul class="grid">
+    {items.map((it, i) => (
+      <li class="item" style={`grid-area:${it.area}`} data-area={it.area}>
+        <figure>
+          <div class="frame" style={`aspect-ratio:${it.ratio}`}>
+            <img src={it.src.src} srcset={it.set} sizes="(min-width: 1024px) 45vw, 100vw" alt={meta[it.id].alt} width={it.src.width} height={it.src.height} loading="lazy" decoding="async" data-pixel-img />
+            <canvas class="px" data-pixel-canvas></canvas>
+          </div>
+          <figcaption>
+            <span class="muted">({String(i + 1).padStart(2, '0')})</span>
+            <span>{meta[it.id].caption}</span>
+            <span class="label credit">{meta[it.id].credit}</span>
+          </figcaption>
+        </figure>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .head {
+    display: grid;
+    gap: 12px;
+  }
+  .note {
+    max-width: 44ch;
+  }
+  .grid {
+    display: grid;
+    gap: 24px;
+    margin-top: clamp(40px, 6vw, 96px);
+    grid-template-areas: 'a' 'b' 'c' 'd';
+  }
+  .frame {
+    position: relative;
+    overflow: hidden;
+    background: var(--paper-2);
+  }
+  .frame img,
+  .frame canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .frame img {
+    opacity: 0;
+  }
+  .frame canvas[data-done] + img,
+  .frame img:has(+ canvas[data-done]) {
+    opacity: 1;
+  }
+  figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid var(--line-soft);
+    margin-top: 10px;
+  }
+  .credit {
+    margin-left: auto;
+    opacity: 0.6;
+  }
+  @media (width >= 1024px) {
+    .grid {
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-areas:
+        'a a a a a a a . b b b b'
+        '. . c c c c c . d d d d';
+      column-gap: 24px;
+      row-gap: 120px;
+    }
+    .item[data-area='b'] {
+      margin-top: 240px;
+    }
+    .item[data-area='d'] {
+      margin-top: -120px;
+    }
+  }
+</style>
+
+<script>
+  import { pixelReveal } from '@/scripts/pixel-image';
+  const s = document.getElementById('ciudad')!;
+  s.querySelectorAll<HTMLElement>('.frame').forEach((f) => {
+    const img = f.querySelector<HTMLImageElement>('[data-pixel-img]')!;
+    const canvas = f.querySelector<HTMLCanvasElement>('[data-pixel-canvas]')!;
+    pixelReveal(img, canvas);
+  });
+</script>

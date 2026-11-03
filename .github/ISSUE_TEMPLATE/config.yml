@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/pedro-cv/piyo-landing/security/advisories/new
+    about: Report privately. Never open a public issue for security problems.
+  - name: ¿No usás GitHub? Escribinos
+    url: mailto:pedro.cv.dev@gmail.com
+    about: Ideas, errores o palabras nuevas por correo.

@@ -1,0 +1,196 @@
+---
+import site from '@/data/site.json';
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const heroImg = site.images[0];
+---
+
+<section class="hero" id="top" data-hero>
+  <img class="hero-img" src={`${base}hero-2048.jpg`} alt={heroImg.alt} width="2048" height="1152" decoding="async" fetchpriority="high" data-hero-img />
+  <div class="veil" aria-hidden="true"></div>
+
+  <div class="content wrap">
+    <p class="label kicker" data-rise>App libre · Santa Cruz de la Sierra</p>
+    <h1 class="display title" data-hero-title>piyo</h1>
+    <div class="row">
+      <p class="tagline display" data-hero-tagline>{site.tagline}</p>
+      <div class="copy">
+        <p class="lead" data-rise>{site.description}</p>
+        <div class="ctas" data-rise>
+          <a class="btn btn--paper" href={site.repos.app.url} target="_blank" rel="noopener">
+            <span class="btn-label"><span>Aportar a la app</span><span aria-hidden="true">Aportar a la app</span></span>
+            <span class="btn-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="btn" href={site.repos.backend.url} target="_blank" rel="noopener">
+            <span class="btn-label"><span>Aportar al backend</span><span aria-hidden="true">Aportar al backend</span></span>
+            <span class="btn-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ul class="index wrap" aria-label="Índice">
+    {[
+      ['01', 'Qué es', '#que-es'],
+      ['02', 'Aportá', '#aporta'],
+      ['03', 'Palabras', '#palabras'],
+      ['04', 'Jugá', '#juga'],
+    ].map(([n, l, h]) => (
+      <li><a href={h} data-scroll><span class="muted">({n})</span> <span class="label">{l}</span></a></li>
+    ))}
+    <li class="cue" aria-hidden="true"><span class="label">↓</span> <span>Scroll</span></li>
+  </ul>
+
+  <div class="seam" data-seam aria-hidden="true"></div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    /* content / index row / band reserved for the seam (set by seam.ts, keeps 24px clear of text) */
+    grid-template-rows: 1fr auto calc(var(--seam-h, 0px) + 24px);
+    color: var(--paper);
+    isolation: isolate;
+  }
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+  .veil {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to bottom, rgb(0 0 0 / 0.34), rgb(0 0 0 / 0.16) 60%, rgb(0 0 0 / 0.48));
+  }
+  .content {
+    padding-top: clamp(96px, 16vh, 160px);
+    padding-bottom: clamp(24px, 4vh, 48px);
+    align-self: end;
+  }
+  .kicker {
+    margin-bottom: 1rem;
+  }
+  .title {
+    text-transform: none; /* the wordmark is lowercase */
+    font-size: var(--fs-hero);
+    line-height: 0.85;
+    margin-left: -0.04em;
+  }
+  .row {
+    display: grid;
+    gap: 24px;
+    margin-top: clamp(16px, 2vw, 28px);
+  }
+  .tagline {
+    font-size: clamp(1.75rem, 4.2vw, 3.5rem);
+    max-width: 12ch;
+  }
+  .lead {
+    max-width: 44ch;
+    font-size: clamp(0.9rem, 0.85rem + 0.3vw, 1.05rem);
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .ctas .btn:not(.btn--paper) {
+    --btn-fg: var(--paper);
+    border-color: rgb(244 241 232 / 0.5);
+  }
+  .ctas .btn:not(.btn--paper):hover {
+    --btn-bg: rgb(244 241 232 / 0.12);
+  }
+  .index {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid rgb(244 241 232 / 0.4);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    row-gap: 8px;
+    z-index: 6;
+    font-size: var(--fs-label);
+  }
+  .index li:not(.cue) a {
+    display: inline-flex;
+    gap: 8px;
+  }
+  .cue {
+    display: none;
+  }
+  .seam {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .seam :global(canvas) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  @media (width >= 1024px) {
+    .row {
+      grid-template-columns: 5fr 7fr;
+      align-items: end;
+    }
+    .copy {
+      justify-self: end;
+      max-width: 520px;
+    }
+    .index {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    .cue {
+      display: inline-flex;
+      gap: 8px;
+      justify-self: end;
+    }
+  }
+</style>
+
+<script>
+  import { heroTitleIn, wordsIn, gsap, reduced } from '@/scripts/motion';
+  import words from '@/data/words.json';
+
+  const hero = document.querySelector<HTMLElement>('[data-hero]')!;
+  const title = hero.querySelector<HTMLElement>('[data-hero-title]')!;
+  const tagline = hero.querySelector<HTMLElement>('[data-hero-tagline]')!;
+  const img = hero.querySelector<HTMLImageElement>('[data-hero-img]')!;
+  const host = hero.querySelector<HTMLElement>('[data-seam]')!;
+
+  heroTitleIn(title, 0.15);
+  wordsIn(tagline, 'top 100%', 0.12);
+  if (!reduced) {
+    gsap.fromTo(hero.querySelectorAll('[data-rise]'), { y: 24, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, stagger: 0.12, ease: 'power3.out', delay: 0.6 });
+    gsap.fromTo(img, { scale: 1.08 }, { scale: 1, duration: 2.4, ease: 'power2.out' });
+  }
+
+  const styles = getComputedStyle(document.documentElement);
+  const text = words.words.map((w) => w.word).join(' · ') + ' · ';
+  // three.js loads in its own chunk, after the first paint.
+  if (!reduced) {
+    import('@/scripts/seam').then(({ mountSeam }) =>
+      mountSeam({
+        host,
+        hero,
+        img,
+        text,
+        fontFamily: styles.getPropertyValue('--font-mono').trim() || 'monospace',
+        paper: styles.getPropertyValue('--paper').trim() || '#f4f1e8',
+        ink: styles.getPropertyValue('--ink').trim() || '#0f1a14',
+      }),
+    );
+  } else {
+    host.style.display = 'none';
+  }
+</script>

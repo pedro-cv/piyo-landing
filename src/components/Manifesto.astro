@@ -1,0 +1,206 @@
+---
+import site from '@/data/site.json';
+import piyo800 from '@/assets/piyo-cutout-800.png';
+import piyo400 from '@/assets/piyo-cutout-400.png';
+import icon512 from '@/assets/app-icon-512.png';
+import icon256 from '@/assets/app-icon-256.png';
+const cards = [
+  { n: '01', title: 'Funciona sin internet', body: 'Las líneas, el planificador de viajes y tus favoritos viven en el teléfono. Buscar direcciones o bajar mapas nuevos sí necesita conexión, y la app lo dice sin vueltas.' },
+  { n: '02', title: 'Sin cuenta, sin anuncios, sin rastreo', body: 'No hay registro ni analítica. Lo único que viaja al servidor es un identificador anónimo, con sal y hash, para evitar abusos en los reportes.' },
+  { n: '03', title: 'Datos que mejora la gente', body: 'Los recorridos cambian. Desde la app reportás errores o dibujás la ruta corregida; los revisores la suman a la próxima versión de los datos.' },
+];
+const tags = ['micros', 'trufis', 'ida y vuelta', 'transbordos', 'mapa propio'];
+---
+
+<section class="section wrap" id="que-es" aria-labelledby="que-es-title">
+  <div class="top">
+    <p class="label">Qué es</p>
+    <a class="app-badge" href={site.playStore.url || site.repos.app.url} target="_blank" rel="noopener" aria-label={site.playStore.url ? 'Descargar piyo en Google Play' : 'piyo llega pronto a Google Play; abre el repositorio de la app'} data-rise>
+      <img class="app-icon" src={icon256.src} srcset={`${icon256.src} 256w, ${icon512.src} 512w`} sizes="56px" width={icon256.width} height={icon256.height} alt="" loading="lazy" decoding="async" />
+      <span class="app-badge-text">
+        <span class="label">{site.playStore.url ? 'Descargar' : 'Próximamente'}</span>
+        <span class="display app-badge-store">{site.playStore.label}</span>
+      </span>
+      <span class="btn-arrow" aria-hidden="true">↗</span>
+    </a>
+  </div>
+  <h2 class="display h2 wipe" id="que-es-title" data-wipe>
+    <span class="wipe-outline" aria-hidden="true">Sin vueltas</span>
+    <span class="wipe-fill">Sin vueltas</span>
+  </h2>
+
+  <div class="grid-12 intro">
+    <p class="big" data-words>piyo es la forma camba de decir ñandú: el ave que corre rápido por la pampa. La app hace lo mismo con el micro: te dice cuál tomar, dónde subir y dónde bajar, sin publicidad y sin pedirte nada.</p>
+    <div class="mascot-col">
+      <img class="mascot" src={piyo400.src} srcset={`${piyo400.src} 400w, ${piyo800.src} 800w`} sizes="(min-width: 1024px) 36vw, 78vw" width={piyo400.width} height={piyo400.height} alt="Un piyo (ñandú), el ave corredora que da nombre a la app" loading="lazy" decoding="async" data-rise />
+      <ul class="tags" aria-label="Lo que cubre">
+        {tags.map((t) => <li class="tag" data-float>{t}</li>)}
+      </ul>
+    </div>
+  </div>
+
+  <ul class="facts" aria-label="Datos">
+    {site.facts.map((f) => (
+      <li data-rise>
+        <span class="display num">{f.value}</span>
+        <span class="label">{f.label}</span>
+      </li>
+    ))}
+  </ul>
+
+  <ul class="cards">
+    {cards.map((c) => (
+      <li class="card" data-rise>
+        <span class="muted">({c.n})</span>
+        <h3 class="display h3">{c.title}</h3>
+        <p>{c.body}</p>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .app-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 8px 16px 8px 8px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+  }
+  .app-badge:hover {
+    background: var(--green-900);
+    color: var(--paper);
+  }
+  .app-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--brand);
+    box-shadow: 0 0 0 2px var(--paper);
+    padding: 5px;
+    object-fit: contain;
+  }
+  .app-badge-text {
+    display: grid;
+    line-height: 1.1;
+  }
+  .app-badge-store {
+    font-size: 1.25rem;
+  }
+  .h2 {
+    font-size: var(--fs-h2);
+    margin-top: 0.4em;
+  }
+  .intro {
+    margin-top: clamp(40px, 6vw, 96px);
+    row-gap: 32px;
+  }
+  .big {
+    grid-column: 1 / -1;
+    font-size: clamp(1.1rem, 1rem + 1.1vw, 2rem);
+    line-height: 1.3;
+    max-width: 30ch;
+  }
+  .mascot-col {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: 20px;
+    justify-items: end;
+  }
+  .mascot {
+    width: min(78vw, 520px);
+    height: auto;
+    filter: drop-shadow(0 18px 24px rgb(35 51 4 / 0.18));
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-content: start;
+  }
+  .tag {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.5em 1em;
+    font-size: var(--fs-label);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-top: clamp(48px, 7vw, 112px);
+  }
+  .facts li {
+    display: grid;
+    gap: 6px;
+    padding: 20px 0;
+  }
+  .facts li + li {
+    border-left: 1px solid var(--line);
+    padding-left: 16px;
+  }
+  .num {
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    line-height: 1;
+  }
+  .cards {
+    display: grid;
+    gap: 16px;
+    margin-top: clamp(48px, 7vw, 112px);
+  }
+  .card {
+    display: grid;
+    align-content: start;
+    gap: 16px;
+  }
+  .h3 {
+    font-size: var(--fs-h3);
+    max-width: 12ch;
+  }
+  @media (width >= 1024px) {
+    .big {
+      grid-column: 1 / 7;
+    }
+    .mascot-col {
+      grid-column: 7 / -1;
+    }
+    .tags {
+      justify-content: end;
+    }
+    .cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .card {
+      aspect-ratio: 1 / 0.95;
+    }
+    .card p {
+      align-self: end;
+      max-width: 34ch;
+    }
+  }
+</style>
+
+<script>
+  import { wipeHeading, wordsIn, riseIn, floatTags } from '@/scripts/motion';
+  const s = document.getElementById('que-es')!;
+  const h = s.querySelector<HTMLElement>('[data-wipe]')!;
+  if (!h.dataset.wipeReady) {
+    h.dataset.wipeReady = '1';
+    wipeHeading(h);
+  }
+  wordsIn(s.querySelector<HTMLElement>('[data-words]')!, 'top 85%', 0.03);
+  riseIn(s.querySelectorAll('[data-rise]'));
+  floatTags(s.querySelectorAll('[data-float]'));
+</script>

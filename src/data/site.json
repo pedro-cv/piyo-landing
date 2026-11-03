@@ -1,0 +1,102 @@
+{
+  "name": "piyo",
+  "tagline": "El micro, sin vueltas.",
+  "description": "App libre y sin publicidad para moverse en micro por Santa Cruz de la Sierra. Código abierto: sumate.",
+  "repos": {
+    "app": {
+      "label": "piyo-app",
+      "title": "La app",
+      "url": "https://github.com/pedro-cv/piyo-app",
+      "issues": "https://github.com/pedro-cv/piyo-app/issues",
+      "goodFirstIssues": "https://github.com/pedro-cv/piyo-app/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22",
+      "contributing": "https://github.com/pedro-cv/piyo-app/blob/main/CONTRIBUTING.md",
+      "stack": [
+        "Kotlin",
+        "Jetpack Compose",
+        "MapLibre",
+        "Offline first"
+      ],
+      "blurb": "Android. Planea viajes en el teléfono, sin internet. Líneas, favoritos y un editor para dibujar recorridos."
+    },
+    "backend": {
+      "label": "piyo-backend",
+      "title": "El backend",
+      "url": "https://github.com/pedro-cv/piyo-backend",
+      "issues": "https://github.com/pedro-cv/piyo-backend/issues",
+      "goodFirstIssues": "https://github.com/pedro-cv/piyo-backend/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22",
+      "contributing": "https://github.com/pedro-cv/piyo-backend/blob/main/CONTRIBUTING.md",
+      "stack": [
+        "Go",
+        "PostGIS",
+        "Docker Compose",
+        "Mapas propios"
+      ],
+      "blurb": "API pequeña: publica los datos de líneas, sirve el mapa y recibe reportes y aportes de recorridos."
+    }
+  },
+  "landing": {
+    "label": "piyo-landing",
+    "url": "https://github.com/pedro-cv/piyo-landing",
+    "issues": "https://github.com/pedro-cv/piyo-landing/issues",
+    "editWords": "https://github.com/pedro-cv/piyo-landing/edit/main/src/data/words.json"
+  },
+  "contact": {
+    "email": "pedro.cv.dev@gmail.com",
+    "subject": "Hola desde la página de piyo"
+  },
+  "facts": [
+    {
+      "value": "133",
+      "label": "líneas de micro"
+    },
+    {
+      "value": "294",
+      "label": "recorridos ida y vuelta"
+    },
+    {
+      "value": "0",
+      "label": "anuncios, cuentas o rastreo"
+    }
+  ],
+  "images": [
+    {
+      "id": "city-cathedral",
+      "alt": "Torre de la catedral de Santa Cruz entre palmeras, cielo azul",
+      "caption": "La catedral, desde la plaza",
+      "credit": "Travel Media"
+    },
+    {
+      "id": "city-skyline",
+      "alt": "Vista del perfil urbano de Santa Cruz de la Sierra",
+      "caption": "La ciudad que crece en anillos",
+      "credit": "Universidad Franz Tamayo"
+    },
+    {
+      "id": "city-perspective",
+      "alt": "Perspectiva de una avenida de Santa Cruz",
+      "caption": "Avenidas por donde pasa el micro",
+      "credit": "El Deber"
+    },
+    {
+      "id": "city-aerial",
+      "alt": "Vista aérea de Santa Cruz de la Sierra",
+      "caption": "Desde arriba, los anillos",
+      "credit": "Wikimedia Commons"
+    },
+    {
+      "id": "city-sign",
+      "alt": "Vista de la ciudad de Santa Cruz al atardecer",
+      "caption": "Cae la tarde en Santa Cruz",
+      "credit": "Foto compartida en Facebook"
+    }
+  ],
+  "licenses": {
+    "code": "GPL-3.0-or-later",
+    "map": "Datos de mapa © OpenStreetMap contributors (ODbL)"
+  },
+  "playStore": {
+    "url": "",
+    "label": "Google Play",
+    "soon": "Pronto en Google Play"
+  }
+}

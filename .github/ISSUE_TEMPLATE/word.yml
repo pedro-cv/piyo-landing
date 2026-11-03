@@ -1,0 +1,24 @@
+name: Palabra camba
+description: Proponé una palabra o un dicho para la página.
+labels: ["words"]
+body:
+  - type: input
+    id: word
+    attributes:
+      label: Palabra o dicho
+    validations:
+      required: true
+  - type: textarea
+    id: meaning
+    attributes:
+      label: Qué significa (con tus palabras)
+    validations:
+      required: true
+  - type: input
+    id: en
+    attributes:
+      label: Traducción al inglés (si sabés)
+  - type: input
+    id: source
+    attributes:
+      label: Fuente (libro, página web, o "lo dice mi abuela")

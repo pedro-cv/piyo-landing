@@ -1,0 +1,130 @@
+---
+import data from '@/data/words.json';
+import SectionTitle from '@/components/SectionTitle.astro';
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const words = data.words;
+const marquee = [...words, ...words];
+const teaser = words.filter((w) => w.type === 'word').slice(0, 6);
+---
+
+<section class="section" id="palabras" aria-labelledby="palabras-title">
+  <div class="wrap">
+    <p class="label">Palabras</p>
+    <SectionTitle id="palabras-title" text="Hablá camba" />
+    <p class="note" data-words>Las palabras que atraviesan la foto de arriba son camba: la forma de hablar de Santa Cruz. Hay {words.length} en el diccionario abierto de piyo, cada una con su significado y su traducción.</p>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      {marquee.map((w) => (
+        <span class="m-item"><span class="display">{w.word}</span><span class="label">{w.translation_en}</span></span>
+      ))}
+    </div>
+  </div>
+
+  <div class="wrap bottom">
+    <ul class="teaser" aria-label="Algunas palabras">
+      {teaser.map((w) => (
+        <li data-rise>
+          <span class="display w">{w.word}</span>
+          <span class="label">{w.translation_en}</span>
+        </li>
+      ))}
+    </ul>
+    <div class="cta" data-rise>
+      <a class="btn btn--solid" href={`${base}palabras`}>
+        <span class="btn-label"><span>Ver las {words.length} palabras</span><span aria-hidden="true">Ver las {words.length} palabras</span></span>
+        <span class="btn-arrow" aria-hidden="true">→</span>
+      </a>
+      <p class="muted">Buscá, filtrá por tema, dá vuelta las tarjetas y compartí la palabra del día.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .note {
+    margin-top: 16px;
+    max-width: 52ch;
+    font-size: clamp(1rem, 0.95rem + 0.4vw, 1.25rem);
+    line-height: 1.35;
+  }
+  .marquee {
+    overflow: hidden;
+    border-block: 1px solid var(--line);
+    margin-top: clamp(32px, 5vw, 64px);
+    padding-block: 14px;
+    --speed: 90s;
+  }
+  .track {
+    display: flex;
+    gap: clamp(28px, 4vw, 64px);
+    width: max-content;
+    animation: slide var(--speed) linear infinite;
+  }
+  .m-item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 12px;
+    white-space: nowrap;
+  }
+  .m-item .display {
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1;
+  }
+  @keyframes slide {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .track {
+      animation: none;
+    }
+  }
+  .bottom {
+    display: grid;
+    gap: 32px;
+    margin-top: clamp(32px, 5vw, 64px);
+  }
+  .teaser {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 24px;
+  }
+  .teaser li {
+    display: grid;
+    gap: 4px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .w {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    line-height: 1;
+  }
+  .cta {
+    display: grid;
+    gap: 12px;
+    align-content: start;
+    justify-items: start;
+  }
+  @media (width >= 1024px) {
+    .bottom {
+      grid-template-columns: 7fr 5fr;
+      align-items: start;
+    }
+    .teaser {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .cta {
+      justify-self: end;
+      max-width: 36ch;
+    }
+  }
+</style>
+
+<script>
+  import { wordsIn, riseIn } from '@/scripts/motion';
+  const s = document.getElementById('palabras')!;
+  wordsIn(s.querySelector<HTMLElement>('[data-words]')!, 'top 85%', 0.02);
+  riseIn(s.querySelectorAll('[data-rise]'), 'top 90%', 0.05);
+</script>

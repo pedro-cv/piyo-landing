@@ -1,0 +1,9 @@
+# LF in the repository, native on checkout.
+* text=auto eol=lf
+*.sh text eol=lf
+
+# Binary assets
+*.png binary
+*.jpg binary
+*.webp binary
+*.woff2 binary

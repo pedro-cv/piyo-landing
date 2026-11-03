@@ -1,0 +1,276 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto;
+  background: var(--bg);
+}
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  font-optical-sizing: auto;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+img,
+canvas,
+svg,
+picture {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:focus-visible,
+button:focus-visible,
+canvas:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+::selection {
+  background: var(--green-300);
+  color: var(--green-900);
+}
+
+/* Typography */
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.label::before {
+  content: '[';
+}
+.label::after {
+  content: ']';
+}
+.muted {
+  opacity: 0.72;
+}
+
+/* Layout */
+.wrap {
+  padding-inline: var(--gutter);
+}
+.section {
+  padding-block: var(--section);
+}
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(12px, 1.5vw, 24px);
+}
+.hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 0;
+}
+
+/* Buttons (atelier-style: slide-up label + arrow) */
+.btn {
+  --btn-bg: transparent;
+  --btn-fg: var(--fg);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75em;
+  padding: 0.9em 1.25em;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
+}
+.btn .btn-label {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1.2;
+}
+.btn .btn-label > span {
+  display: block;
+  transition: transform 0.35s var(--ease-out);
+}
+.btn .btn-label > span + span {
+  position: absolute;
+  inset: 0;
+  transform: translateY(110%);
+}
+.btn:hover .btn-label > span:first-child {
+  transform: translateY(-110%);
+}
+.btn:hover .btn-label > span + span {
+  transform: translateY(0);
+}
+.btn .btn-arrow {
+  display: inline-block;
+  transition: transform 0.35s var(--ease-out);
+}
+.btn:hover .btn-arrow {
+  transform: translate(3px, -3px);
+}
+.btn--solid {
+  --btn-bg: var(--accent);
+  --btn-fg: var(--paper);
+  border-color: var(--accent);
+}
+.btn--solid:hover {
+  --btn-bg: var(--green-700);
+  border-color: var(--green-700);
+}
+.btn--paper {
+  --btn-bg: var(--paper);
+  --btn-fg: var(--green-900);
+  border-color: var(--paper);
+}
+
+/* Split text helpers (filled by motion.ts) */
+.split .word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.split .char {
+  display: inline-block;
+  will-change: transform;
+}
+.mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  /* room for accents (Á, Ó) above the tight display line-height */
+  padding-top: 0.14em;
+  margin-top: -0.14em;
+}
+.mask > .line,
+.mask > .word {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* Heading made of an outlined layer and a filled layer revealed with a clip-path wipe */
+.wipe {
+  position: relative;
+  display: inline-block;
+}
+.wipe .wipe-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--fg);
+}
+.wipe .wipe-fill {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+
+/* Pixel dissolve grid between sections */
+.pixel-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 25), 1fr);
+  grid-template-rows: repeat(var(--rows, 6), 1fr);
+  width: 100%;
+  height: clamp(72px, 10vw, 160px);
+  pointer-events: none;
+}
+.pixel-grid > i {
+  display: block;
+  background: var(--cell-from);
+}
+
+/* Cards */
+.card {
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  padding: clamp(20px, 2.5vw, 36px);
+}
+
+/* Reduced motion: everything is visible and still */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .wipe .wipe-fill {
+    clip-path: none;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

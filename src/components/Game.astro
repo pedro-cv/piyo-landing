@@ -1,0 +1,131 @@
+---
+import data from '@/data/obstacles.json';
+import SectionTitle from '@/components/SectionTitle.astro';
+---
+
+<section class="section wrap" id="juga" aria-labelledby="juga-title">
+  <div class="head">
+    <div>
+      <p class="label">Jugá</p>
+      <SectionTitle id="juga-title" text="Corré como piyo" />
+    </div>
+    <p class="muted how">Espacio, ↑ o tocá para saltar; mantené para saltar más alto. ↓ o deslizá hacia abajo para agacharte. Las aves vuelan a tres alturas: saltá, agachate o pasá por debajo.</p>
+  </div>
+
+  <div class="stage" data-rise>
+    <canvas class="game" tabindex="0" role="img" aria-label="Juego: un piyo corre y salta obstáculos típicos de Santa Cruz. Usá espacio para saltar y flecha abajo para agacharte." data-game></canvas>
+    <div class="hud">
+      <span class="label">Puntos <b data-score>0</b></span>
+      <span class="label">Mejor <b data-best>0</b></span>
+      <button class="btn" type="button" data-play>
+        <span class="btn-label"><span>Jugar</span><span aria-hidden="true">Jugar</span></span>
+      </button>
+    </div>
+  </div>
+
+  <ul class="legend" aria-label="Obstáculos">
+    {data.obstacles.map((o) => (
+      <li><span class="display">{o.name}</span> <span class="label">{o.en}</span></li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .head {
+    display: grid;
+    gap: 16px;
+    align-items: end;
+  }
+  .how {
+    max-width: 44ch;
+  }
+  .stage {
+    margin-top: clamp(32px, 5vw, 64px);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--paper);
+  }
+  .game {
+    width: 100%;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    outline-offset: -3px;
+  }
+  .hud {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 14px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .hud b {
+    font-weight: 600;
+    margin-left: 0.4em;
+  }
+  .hud .btn {
+    margin-left: auto;
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    margin-top: 20px;
+  }
+  .legend .display {
+    font-size: 1.25rem;
+  }
+  @media (width >= 1024px) {
+    .head {
+      grid-template-columns: 1fr 1fr;
+    }
+    .how {
+      justify-self: end;
+    }
+  }
+</style>
+
+<script>
+  import { riseIn } from '@/scripts/motion';
+  import { mountRunner, type ObstacleDef } from '@/scripts/runner';
+  import data from '@/data/obstacles.json';
+
+  const s = document.getElementById('juga')!;
+  riseIn(s.querySelectorAll('[data-rise]'));
+
+  const canvas = s.querySelector<HTMLCanvasElement>('[data-game]')!;
+  const score = s.querySelector<HTMLElement>('[data-score]')!;
+  const best = s.querySelector<HTMLElement>('[data-best]')!;
+  const play = s.querySelector<HTMLButtonElement>('[data-play]')!;
+  const css = getComputedStyle(document.documentElement);
+  const v = (n: string, d: string) => css.getPropertyValue(n).trim() || d;
+
+  // Mount lazily: only when the section is near the viewport.
+  const io = new IntersectionObserver(
+    (entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      io.disconnect();
+      mountRunner({
+        canvas,
+        obstacles: data.obstacles as ObstacleDef[],
+        ink: v('--green-700', '#1b4a32'),
+        accent: v('--terracotta', '#e39e66'),
+        paper: v('--paper', '#f4f1e8'),
+        night: v('--green-900', '#0f2a1c'),
+        onState: (st) => {
+          score.textContent = String(st.score);
+          best.textContent = String(st.best);
+          play.querySelectorAll('span span').forEach((el) => (el.textContent = st.phase === 'running' ? 'Corriendo…' : st.phase === 'dead' ? 'Otra vez' : 'Jugar'));
+        },
+      });
+      play.addEventListener('click', () => {
+        canvas.focus({ preventScroll: true });
+        canvas.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space', bubbles: true }));
+      });
+    },
+    { rootMargin: '300px' },
+  );
+  io.observe(canvas);
+</script>

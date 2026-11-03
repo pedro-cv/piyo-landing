@@ -1,0 +1,186 @@
+---
+import site from '@/data/site.json';
+import SectionTitle from '@/components/SectionTitle.astro';
+const repos = [site.repos.app, site.repos.backend];
+const mailto = `mailto:${site.contact.email}?subject=${encodeURIComponent(site.contact.subject)}`;
+const steps = [
+  { n: '1', title: 'Forkeá', body: 'Hacé tu copia del repo en GitHub y clonala. El README dice cómo correr todo en tu máquina.' },
+  { n: '2', title: 'Elegí un issue', body: 'Empezá por los marcados «good first issue». Comentá que lo tomás para que nadie trabaje doble.' },
+  { n: '3', title: 'Mandá tu pull request', body: 'Una rama por cambio, tests en verde, y en la descripción contá qué probaste. CI revisa el resto.' },
+];
+---
+
+<section class="section wrap theme-dark dark" id="aporta" aria-labelledby="aporta-title">
+  <p class="label">Aportá</p>
+  <SectionTitle id="aporta-title" text="Sumate al código" />
+  <p class="lead" data-words>Dos repositorios abiertos, licencia libre, sin dueños ni jefes. Si programás en Kotlin o en Go, hay trabajo. Si no, también.</p>
+
+  <ol class="steps">
+    {steps.map((s) => (
+      <li class="step" data-rise>
+        <span class="display num">{s.n}</span>
+        <h3 class="display h3">{s.title}</h3>
+        <p>{s.body}</p>
+      </li>
+    ))}
+  </ol>
+
+  <ul class="repos">
+    {repos.map((r) => (
+      <li class="repo card" data-rise>
+        <div class="repo-head">
+          <span class="label">{r.label}</span>
+          <h3 class="display h3">{r.title}</h3>
+        </div>
+        <p>{r.blurb}</p>
+        <ul class="stack" aria-label="Tecnologías">
+          {r.stack.map((t) => <li>{t}</li>)}
+        </ul>
+        <div class="ctas">
+          <a class="btn btn--paper" href={r.url} target="_blank" rel="noopener">
+            <span class="btn-label"><span>Ver repo</span><span aria-hidden="true">Ver repo</span></span>
+            <span class="btn-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="btn" href={r.goodFirstIssues} target="_blank" rel="noopener">
+            <span class="btn-label"><span>Good first issues</span><span aria-hidden="true">Good first issues</span></span>
+            <span class="btn-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="more" href={r.contributing} target="_blank" rel="noopener">Guía de contribución →</a>
+        </div>
+      </li>
+    ))}
+  </ul>
+
+  <div class="other" data-rise>
+    <p class="label">¿No programás?</p>
+    <p>También hacés falta. Desde la app podés <strong>reportar</strong> un recorrido que cambió o <strong>dibujar</strong> la ruta correcta y mandarla a revisión. Y si hablás camba, agregá palabras a esta página: viven en un archivo que cualquiera puede editar.</p>
+    <p>¿GitHub no es lo tuyo? Escribinos. Contanos una idea, un error o una palabra que falta, y nosotros la subimos.</p>
+    <div class="ctas">
+      <a class="btn btn--paper" href={mailto}>
+        <span class="btn-label"><span>Escribinos</span><span aria-hidden="true">Escribinos</span></span>
+        <span class="btn-arrow" aria-hidden="true">✉</span>
+      </a>
+      <a class="more more--start" href={site.landing.editWords} target="_blank" rel="noopener">Editar las palabras en GitHub →</a>
+    </div>
+    <p class="muted mail">{site.contact.email}</p>
+  </div>
+</section>
+
+<style>
+  .dark {
+    background: var(--green-900);
+    color: var(--paper);
+  }
+  .lead {
+    margin-top: 24px;
+    max-width: 48ch;
+    font-size: clamp(1rem, 0.95rem + 0.5vw, 1.35rem);
+    line-height: 1.35;
+  }
+  .steps {
+    display: grid;
+    gap: 24px;
+    margin-top: clamp(48px, 7vw, 112px);
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+    counter-reset: step;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 16px;
+    row-gap: 6px;
+    align-items: start;
+  }
+  .step .num {
+    grid-row: 1 / span 2;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 0.9;
+    color: var(--green-300);
+  }
+  .h3 {
+    font-size: var(--fs-h3);
+  }
+  .step p {
+    max-width: 38ch;
+  }
+  .repos {
+    display: grid;
+    gap: 16px;
+    margin-top: clamp(48px, 7vw, 112px);
+  }
+  .repo {
+    display: grid;
+    gap: 20px;
+    align-content: start;
+  }
+  .repo-head {
+    display: grid;
+    gap: 8px;
+  }
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: var(--fs-label);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .stack li {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.4em 0.9em;
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .more {
+    font-size: var(--fs-label);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-left: auto;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+  }
+  .other {
+    margin-top: clamp(48px, 7vw, 112px);
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+    display: grid;
+    gap: 12px;
+    max-width: 60ch;
+  }
+  .more--start {
+    margin-left: 0;
+  }
+  .mail {
+    font-size: var(--fs-label);
+    letter-spacing: 0.04em;
+    user-select: all; /* easy to copy when no mail app is set up */
+  }
+  .other strong {
+    color: var(--green-300);
+    font-weight: 600;
+  }
+  @media (width >= 1024px) {
+    .steps {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+    .repos {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+  }
+</style>
+
+<script>
+  import { wordsIn, riseIn } from '@/scripts/motion';
+  const s = document.getElementById('aporta')!;
+  wordsIn(s.querySelector<HTMLElement>('[data-words]')!, 'top 85%', 0.03);
+  riseIn(s.querySelectorAll('[data-rise]'));
+</script>

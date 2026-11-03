@@ -1,0 +1,37 @@
+---
+// Section heading: outlined text that fills with colour as it scrolls in (clip-path wipe).
+interface Props {
+  id: string;
+  text: string;
+  size?: 'h2' | 'big';
+  class?: string;
+}
+const { id, text, size = 'h2', class: cls = '' } = Astro.props;
+---
+
+<h2 class:list={['display', 'wipe', size, cls]} id={id} data-wipe>
+  <span class="wipe-outline" aria-hidden="true">{text}</span>
+  <span class="wipe-fill">{text}</span>
+</h2>
+
+<style>
+  .h2 {
+    font-size: var(--fs-h2);
+    margin-top: 0.4em;
+  }
+  .big {
+    font-size: clamp(5rem, 22vw, 18.75rem);
+    line-height: 0.85;
+    margin-left: -0.04em;
+    margin-top: 0.1em;
+  }
+</style>
+
+<script>
+  import { wipeHeading } from '@/scripts/motion';
+  document.querySelectorAll<HTMLElement>('[data-wipe]').forEach((el) => {
+    if (el.dataset.wipeReady) return;
+    el.dataset.wipeReady = '1';
+    wipeHeading(el);
+  });
+</script>

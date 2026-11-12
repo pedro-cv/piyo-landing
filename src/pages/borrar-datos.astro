@@ -1,0 +1,75 @@
+---
+// Data deletion page for the Google Play data-safety form. piyo has no accounts, so the app itself cannot
+// identify a person's server records; deletion of sent data is by email, described by content.
+import Legal from '@/layouts/Legal.astro';
+import site from '@/data/site.json';
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const email = site.contact.email;
+const body = [
+  'Hola, quiero borrar datos que envié desde piyo.',
+  '',
+  'Qué envié (reporte, opinión o recorrido):',
+  'Fecha aproximada:',
+  'Línea o lugar:',
+  'Texto del comentario, si lo recordás:',
+].join('\n');
+const mailto = `mailto:${email}?subject=${encodeURIComponent('Borrar mis datos de piyo')}&body=${encodeURIComponent(body)}`;
+---
+
+<Legal
+  title="Borrar tus datos · piyo"
+  description="Cómo borrar los datos de la app piyo: en tu teléfono, las notificaciones y lo que enviaste a nuestro servidor."
+  heading="Borrar tus datos"
+  updated="11 de noviembre de 2026"
+>
+  <p>
+    piyo no tiene cuentas, así que no hay una cuenta que cerrar. Tus datos están en tres lugares, y cada uno se borra
+    de una forma distinta.
+  </p>
+
+  <h2>1. Lo que está en tu teléfono</h2>
+  <p>Lugares guardados, favoritos, historial de viajes, búsquedas, ajustes y recorridos sin enviar.</p>
+  <ul>
+    <li><strong>Solo el historial de viajes:</strong> en la app, usá "Borrar historial" o "Quitar viaje".</li>
+    <li><strong>Todo:</strong> en Android, abrí Ajustes → Apps → piyo → Almacenamiento → Borrar datos. Desinstalar la app también borra todo.</li>
+  </ul>
+  <p>
+    Borrar los datos de la app también borra tu identificador de instalación. Desde ese momento, nada de lo que
+    enviaste antes se puede relacionar con tu teléfono.
+  </p>
+
+  <h2>2. Las notificaciones</h2>
+  <p>
+    En la app, apagá las notificaciones en Ajustes. En ese momento se borra el token del teléfono y de nuestro
+    servidor, sin que tengas que pedirlo.
+  </p>
+
+  <h2>3. Lo que enviaste a nuestro servidor</h2>
+  <p>
+    Reportes, opiniones y recorridos. No guardamos tu nombre, correo ni teléfono, así que no podemos buscarte por
+    ellos. Para borrar algo que enviaste, contanos qué era:
+  </p>
+  <ol>
+    <li>Escribí a <a href={mailto}>{email}</a> con el asunto "Borrar mis datos de piyo".</li>
+    <li>Contanos qué enviaste: si fue un reporte, una opinión o un recorrido, la fecha aproximada, la línea o el lugar, y el texto del comentario si lo recordás.</li>
+    <li>Lo buscamos y lo borramos dentro de los 30 días. Te respondemos al mismo correo cuando esté hecho.</li>
+  </ol>
+  <p>
+    Usamos tu correo solo para responderte. Si no lo necesitamos más, borramos la conversación.
+  </p>
+
+  <h3>Qué no se puede borrar</h3>
+  <ul>
+    <li>
+      Los recorridos que ya aceptamos y publicamos forman parte de los datos públicos de líneas, y otras personas
+      pueden haberlos descargado. Podemos sacarlos de las próximas versiones, pero no de las copias que ya circulan.
+      Esos datos no llevan ningún dato tuyo.
+    </li>
+    <li>
+      Si no nos podés dar detalles para encontrar tus envíos, no tenemos forma de saber cuáles son. En ese caso,
+      borrar los datos de la app (paso 1) corta cualquier relación entre esos envíos y tu teléfono.
+    </li>
+  </ul>
+
+  <p>Más detalles sobre qué datos usamos en la <a href={`${base}privacidad`}>política de privacidad</a>.</p>
+</Legal>

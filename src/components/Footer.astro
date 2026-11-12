@@ -5,6 +5,7 @@ import icon32 from '@/assets/app-icon-32.webp';
 import icon64 from '@/assets/app-icon-64.webp';
 import icon96 from '@/assets/app-icon-96.webp';
 const year = new Date().getFullYear();
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const mailto = `mailto:${site.contact.email}?subject=${encodeURIComponent(site.contact.subject)}`;
 ---
 
@@ -28,6 +29,10 @@ const mailto = `mailto:${site.contact.email}?subject=${encodeURIComponent(site.c
       <span class="label">Contacto</span>
       <span class="muted">¿No usás GitHub? Escribinos y te respondemos.</span>
       <a href={mailto}>{site.contact.email}</a>
+      <span class="label">Legal</span>
+      <a href={`${base}privacidad`}>Privacidad</a>
+      <a href={`${base}borrar-datos`}>Borrar tus datos</a>
+      <a href={`${base}terminos`}>Términos</a>
     </div>
     <div class="col">
       <span class="label">Licencias</span>

@@ -1,0 +1,193 @@
+---
+// Privacy policy linked from the Google Play listing. Source of truth: piyo-app
+// docs/implementation/PRIVACY.md. When the app starts storing or sending something new, update both.
+import Legal from '@/layouts/Legal.astro';
+import site from '@/data/site.json';
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const email = site.contact.email;
+const mailto = `mailto:${email}?subject=${encodeURIComponent('Privacidad en piyo')}`;
+---
+
+<Legal
+  title="Política de privacidad · piyo"
+  description="Qué datos usa la app piyo, dónde quedan y cómo borrarlos. Sin cuentas, sin publicidad y sin rastreo."
+  heading="Política de privacidad"
+  updated="11 de noviembre de 2026"
+>
+  <p>
+    piyo es una app libre y sin publicidad para moverse en micro por Santa Cruz de la Sierra. No tiene cuentas,
+    no muestra anuncios y no usa herramientas de analítica ni de rastreo. Esta política explica qué datos usa la
+    app, dónde quedan y cómo podés borrarlos.
+  </p>
+  <p class="note">
+    En corto: casi todo queda en tu teléfono. Solo mandamos algo a nuestro servidor cuando vos enviás un reporte,
+    una opinión o un recorrido, o si activás las notificaciones. Tu ubicación no sale del teléfono, salvo cuando
+    la ponés en un reporte o, redondeada a 1 km, para buscar una dirección.
+  </p>
+
+  <h2>Quién es responsable</h2>
+  <p>
+    piyo lo desarrolla y mantiene Pedro Characayo, en Santa Cruz de la Sierra, Bolivia. Para cualquier consulta
+    sobre tus datos escribí a <a href={mailto}>{email}</a>.
+  </p>
+
+  <h2>Lo que queda solo en tu teléfono</h2>
+  <p>Estos datos se guardan en la memoria de la app y nunca se mandan a nuestro servidor:</p>
+  <ul>
+    <li>Los datos de líneas y el mapa de la ciudad, para planear viajes sin internet.</li>
+    <li>Tus lugares guardados (por ejemplo Casa o Trabajo) y tus líneas favoritas.</li>
+    <li>Tus últimas búsquedas y el historial de viajes terminados ("Tus viajes").</li>
+    <li>Tus ajustes: modo oscuro, notificaciones y similares.</li>
+    <li>Los recorridos que dibujás en el editor, hasta que decidas enviarlos.</li>
+    <li>Reportes u opiniones que todavía no se pudieron enviar por falta de conexión. Se borran apenas se envían.</li>
+  </ul>
+  <p>
+    Podés borrar el historial de viajes desde la app. Para borrar todo lo demás, borrá los datos de piyo en los
+    ajustes de Android o desinstalá la app.
+  </p>
+
+  <h2>Tu ubicación</h2>
+  <p>
+    piyo pide permiso de ubicación solo mientras usás la app, y siempre te explica antes para qué. Si decís que no,
+    la app funciona igual: elegís el origen a mano.
+  </p>
+  <ul>
+    <li>La usamos para mostrarte en el mapa, como origen del viaje, para ver qué micros pasan cerca y para guiarte durante el viaje.</li>
+    <li>Solo se lee mientras piyo está en pantalla. No hay seguimiento en segundo plano y la app no pide ese permiso.</li>
+    <li>No se guarda tu posición. Lo único que queda son los viajes que terminaste, en tu teléfono.</li>
+    <li>No se manda a nuestro servidor, salvo como punto de un reporte que vos enviás (por ejemplo, "esta parada no existe").</li>
+    <li>Para ordenar los resultados del buscador de direcciones se manda una zona aproximada, redondeada a unos 1 km (ver "Servicios de terceros").</li>
+  </ul>
+
+  <h2>Lo que mandamos a nuestro servidor</h2>
+  <p>Solo cuando vos hacés alguna de estas acciones:</p>
+  <div class="table">
+    <table>
+      <thead>
+        <tr><th>Cuándo</th><th>Qué se manda</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Enviás un reporte</td>
+          <td>Tipo de problema, la línea, el punto en el mapa y tu comentario (hasta 500 caracteres).</td>
+        </tr>
+        <tr>
+          <td>Respondés la encuesta de opinión</td>
+          <td>La nota, los motivos que marcaste, un comentario opcional (hasta 140 caracteres) y la versión de Android en forma general (por ejemplo "android-34"). Sin ubicación.</td>
+        </tr>
+        <tr>
+          <td>Enviás recorridos que dibujaste</td>
+          <td>Los recorridos, el nombre que le pusiste a tu fuente y un comentario opcional.</td>
+        </tr>
+        <tr>
+          <td>Activás las notificaciones</td>
+          <td>Un identificador de notificaciones (token) para poder avisarte. Ver "Notificaciones".</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Con cada envío van también la versión de la app y de los datos, y un <strong>identificador de instalación</strong>:
+    un código al azar que la app crea la primera vez que la abrís. No sale de tu teléfono, de tu cuenta de Google ni
+    de ningún dato del equipo. Sirve para limitar cuántos envíos se pueden hacer por día y frenar abusos. Si borrás
+    los datos de la app, se crea uno nuevo.
+  </p>
+  <p>
+    Nuestro servidor no guarda ese identificador tal cual. Guarda una versión cifrada en un solo sentido (un "hash"
+    con una clave secreta), así que no se puede volver al código original ni saber de qué teléfono vino. No pedimos
+    ni guardamos nombre, correo, teléfono ni contactos. Las direcciones IP se usan solo en el momento para limitar
+    pedidos abusivos: no se guardan ni se registran.
+  </p>
+  <p>
+    Si aceptamos un recorrido que enviaste, pasa a formar parte de los datos públicos de líneas que publicamos para
+    todos.
+  </p>
+
+  <h2>Notificaciones</h2>
+  <p>
+    Las notificaciones están apagadas hasta que las activás. Sirven para avisarte cuando revisamos un reporte o un
+    recorrido tuyo, y cuando hay datos de líneas nuevos. Usan Firebase Cloud Messaging, de Google. Es el único
+    servicio de Google que usa piyo: no usamos Analytics, Crashlytics ni publicidad.
+  </p>
+  <ul>
+    <li>Recién cuando las activás y Android da el permiso, la app pide un token a Google y nos lo manda.</li>
+    <li>Los mensajes no llevan texto ni datos personales, solo un aviso del tipo "tu aporte fue aceptado". El texto lo arma tu teléfono.</li>
+    <li>Google ve el token, un identificador técnico de la instalación de Firebase y la dirección IP de la conexión. Ver la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">política de privacidad de Google ↗</a>.</li>
+    <li>Si apagás las notificaciones, el token se borra del teléfono y de nuestro servidor. También lo borramos si pasan 60 días sin renovarse.</li>
+  </ul>
+
+  <h2>Servicios de terceros</h2>
+  <div class="table">
+    <table>
+      <thead>
+        <tr><th>Servicio</th><th>Cuándo</th><th>Qué recibe</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Servidor de mapas (el de piyo u <a href="https://openfreemap.org" target="_blank" rel="noopener">OpenFreeMap ↗</a>)</td>
+          <td>Al mostrar el mapa con conexión</td>
+          <td>Tu dirección IP y qué zona del mapa estás mirando, como cualquier mapa web.</td>
+        </tr>
+        <tr>
+          <td><a href="https://photon.komoot.io" target="_blank" rel="noopener">Photon (komoot) ↗</a>, buscador de direcciones</td>
+          <td>Al escribir en el buscador o mover el pin en "elegí en el mapa"</td>
+          <td>El texto que buscás, una zona aproximada (redondeada a unos 1 km) o el punto donde pusiste el pin, y tu dirección IP.</td>
+        </tr>
+        <tr>
+          <td>Google Firebase Cloud Messaging</td>
+          <td>Solo con las notificaciones activadas</td>
+          <td>Ver "Notificaciones".</td>
+        </tr>
+        <tr>
+          <td>Google Play Services (fuentes tipográficas)</td>
+          <td>Al cargar las fuentes de la app</td>
+          <td>Un pedido estándar del sistema. Ningún dato de la app.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    No vendemos ni compartimos tus datos con nadie para publicidad ni para ningún otro fin. Sin conexión, piyo planea
+    viajes con los datos que ya tiene y no se comunica con nadie.
+  </p>
+
+  <h2>Cuánto tiempo guardamos los datos</h2>
+  <ul>
+    <li><strong>Token de notificaciones:</strong> hasta que apagás las notificaciones, o 60 días sin renovarse.</li>
+    <li><strong>Reportes, opiniones y recorridos enviados:</strong> mientras sirvan para revisar y mejorar los datos de líneas. Los recorridos aceptados quedan en los datos públicos.</li>
+    <li><strong>Bloqueos por abuso:</strong> 30 días.</li>
+    <li><strong>En tu teléfono:</strong> hasta que los borrás o desinstalás la app.</li>
+  </ul>
+
+  <h2>Tus derechos y cómo borrar tus datos</h2>
+  <p>
+    Podés pedir ver, corregir o borrar los datos que enviaste. Como no tenemos cuentas, no sabemos quién sos: para
+    encontrar tus envíos necesitamos que nos cuentes qué mandaste. Los pasos están en
+    <a href={`${base}borrar-datos`}>Borrar tus datos</a>.
+  </p>
+
+  <h2>Seguridad</h2>
+  <p>
+    Todo lo que la app manda a nuestro servidor viaja cifrado (HTTPS). El servidor guarda lo mínimo, protege el
+    identificador de instalación con un hash y no registra datos personales. El código de la app y del servidor es
+    abierto: podés revisar exactamente qué hace en
+    <a href={site.repos.app.url} target="_blank" rel="noopener">{site.repos.app.label} ↗</a> y
+    <a href={site.repos.backend.url} target="_blank" rel="noopener">{site.repos.backend.label} ↗</a>.
+  </p>
+
+  <h2>Menores de edad</h2>
+  <p>
+    piyo es una app de transporte para el público general y no está pensada para menores de 13 años. No pedimos datos
+    personales a nadie, tampoco a menores.
+  </p>
+
+  <h2>Cambios en esta política</h2>
+  <p>
+    Si la app empieza a usar datos de otra forma, actualizamos esta página y la fecha de arriba antes de publicar esa
+    versión. El historial de cambios queda en el
+    <a href={site.landing.url} target="_blank" rel="noopener">repositorio de esta página ↗</a>.
+  </p>
+
+  <h2>Contacto</h2>
+  <p>Escribinos a <a href={mailto}>{email}</a>. Respondemos en español o en inglés.</p>
+</Legal>

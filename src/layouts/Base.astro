@@ -8,8 +8,9 @@ interface Props {
   title?: string;
   description?: string;
   preloadHero?: boolean;
+  skipTo?: string; // target of the "Saltar al contenido" link
 }
-const { title = `${site.name} — ${site.tagline}`, description = site.description, preloadHero = false } = Astro.props;
+const { title = `${site.name} — ${site.tagline}`, description = site.description, preloadHero = false, skipTo = '#que-es' } = Astro.props;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 // og:image needs an absolute URL: only emitted when PUBLIC_SITE is set at build time.
 const origin = Astro.site?.toString();
@@ -44,7 +45,7 @@ const og = origin && !origin.includes('piyo.example') ? new URL(`${base}og.jpg`,
     )}
   </head>
   <body>
-    <a class="skip" href="#que-es">Saltar al contenido</a>
+    <a class="skip" href={skipTo}>Saltar al contenido</a>
     <slot />
     <script>
       import { initMotion } from '@/scripts/motion';

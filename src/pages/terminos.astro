@@ -1,0 +1,87 @@
+---
+// Terms of use. Kept short: the key points are that route data can be wrong and that contributions become
+// public data. Licences come from site.json so they stay in one place.
+import Legal from '@/layouts/Legal.astro';
+import site from '@/data/site.json';
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const email = site.contact.email;
+---
+
+<Legal
+  title="Términos de uso · piyo"
+  description="Las reglas para usar la app piyo: datos de líneas, aportes, uso correcto y licencias."
+  heading="Términos de uso"
+  updated="11 de noviembre de 2026"
+>
+  <p>
+    Al usar piyo aceptás estos términos. Son cortos a propósito. Si no estás de acuerdo, no uses la app.
+  </p>
+
+  <h2>Qué es piyo</h2>
+  <p>
+    piyo es una app gratuita, sin publicidad y de código abierto para planear viajes en micro por Santa Cruz de la
+    Sierra. No es un servicio oficial del municipio ni de los operadores de transporte.
+  </p>
+
+  <h2>Los datos de líneas pueden fallar</h2>
+  <p>
+    Los recorridos y las paradas vienen de datos oficiales y de aportes de la comunidad. Los
+    revisamos, pero las líneas cambian y puede haber errores. Usá piyo como guía y confirmá en la calle: mirá el
+    letrero del micro y preguntá al chofer si tenés dudas. Si ves algo mal, reportalo desde la app.
+  </p>
+  <p>
+    La app se ofrece "tal como está". No garantizamos que funcione siempre ni que los datos sean exactos, y no
+    respondemos por demoras, viajes perdidos ni otros daños que salgan de usarla, en la medida que lo permita la ley.
+  </p>
+  <p>
+    Cuidate al moverte. No uses el teléfono mientras cruzás la calle o manejás.
+  </p>
+
+  <h2>Reportes y recorridos que enviás</h2>
+  <ul>
+    <li>Mandá solo información real y que conozcas. No envíes datos personales de otras personas.</li>
+    <li>
+      Al enviar un recorrido nos das permiso para revisarlo, corregirlo y publicarlo como parte de los datos de líneas,
+      bajo la misma licencia que esos datos. Los datos publicados no llevan tu nombre ni ningún dato tuyo.
+    </li>
+    <li>Revisamos cada envío y podemos rechazarlo sin dar explicaciones.</li>
+    <li>
+      Hay límites de envíos por día y por mes. Si un teléfono manda muchos reportes falsos o abusivos, puede quedar
+      bloqueado para enviar durante 30 días.
+    </li>
+  </ul>
+
+  <h2>Uso correcto</h2>
+  <p>
+    No intentes sobrecargar nuestro servidor, saltarte los límites de envío ni usar la app para molestar o engañar
+    a otras personas.
+  </p>
+
+  <h2>Licencias</h2>
+  <ul>
+    <li>
+      El código de la app es libre ({site.licenses.code}). Podés verlo, copiarlo y modificarlo en
+      <a href={site.repos.app.url} target="_blank" rel="noopener">{site.repos.app.label} ↗</a> según esa licencia.
+    </li>
+    <li>{site.licenses.map}.</li>
+    <li>Los datos de líneas muestran su propia atribución y licencia dentro de la app, donde aparecen.</li>
+  </ul>
+
+  <h2>Privacidad</h2>
+  <p>
+    Cómo usamos los datos está en la <a href={`${base}privacidad`}>política de privacidad</a>, y cómo borrarlos en
+    <a href={`${base}borrar-datos`}>Borrar tus datos</a>.
+  </p>
+
+  <h2>Cambios</h2>
+  <p>
+    Podemos actualizar estos términos. Si el cambio es importante, cambiamos la fecha de arriba antes de publicar la
+    nueva versión de la app. Si seguís usando piyo después de un cambio, aceptás los términos nuevos.
+  </p>
+
+  <h2>Ley aplicable y contacto</h2>
+  <p>
+    Estos términos se rigen por las leyes del Estado Plurinacional de Bolivia. Para cualquier consulta escribí a
+    <a href={`mailto:${email}`}>{email}</a>.
+  </p>
+</Legal>

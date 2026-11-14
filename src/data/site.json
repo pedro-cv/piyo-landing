@@ -1,7 +1,11 @@
 {
   "name": "piyo",
   "tagline": "El micro, sin vueltas.",
-  "description": "App libre y sin publicidad para moverse en micro por Santa Cruz de la Sierra. Código abierto: sumate.",
+  "description": "Qué micro tomar en Santa Cruz de la Sierra: 133 líneas de micro, recorridos de ida y vuelta y transbordos. App gratis, sin anuncios y sin internet.",
+  "seo": {
+    "title": "Micros en Santa Cruz: rutas y líneas de micro | piyo",
+    "ogAlt": "piyo, la app para saber qué micro tomar en Santa Cruz de la Sierra"
+  },
   "repos": {
     "app": {
       "label": "piyo-app",
@@ -73,7 +77,7 @@
     },
     {
       "id": "city-perspective",
-      "alt": "Perspectiva de una avenida de Santa Cruz",
+      "alt": "Avenida de Santa Cruz de la Sierra por donde circulan los micros",
       "caption": "Avenidas por donde pasa el micro",
       "credit": "El Deber"
     },

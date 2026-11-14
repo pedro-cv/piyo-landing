@@ -1,0 +1,121 @@
+---
+// Rider-facing section: how to find which micro to take, plus the FAQ.
+// The same questions feed the FAQPage JSON-LD in index.astro (see faqItems), so text and schema never drift.
+import SectionTitle from '@/components/SectionTitle.astro';
+import { faqItems, micros } from '@/data/faq';
+---
+
+<section class="section wrap" id="micros" aria-labelledby="micros-title">
+  <p class="label">Qué micro me lleva</p>
+  <SectionTitle id="micros-title" text="Qué micro tomar" />
+  <p class="lead" data-words>{micros.lead}</p>
+
+  <ol class="steps">
+    {micros.steps.map((s, i) => (
+      <li class="card step" data-rise>
+        <span class="muted">({String(i + 1).padStart(2, '0')})</span>
+        <h3 class="display h3">{s.title}</h3>
+        <p>{s.body}</p>
+      </li>
+    ))}
+  </ol>
+
+  <div class="faq">
+    <h2 class="display h3 faq-title" id="preguntas">Preguntas sobre micros en Santa Cruz</h2>
+    <div class="faq-list">
+      {faqItems.map((f, i) => (
+        <details class="qa" open={i === 0}>
+          <summary><h3 class="q">{f.q}</h3><span class="plus" aria-hidden="true">+</span></summary>
+          <p class="a">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .lead {
+    margin-top: clamp(24px, 3vw, 40px);
+    max-width: 52ch;
+    font-size: clamp(1rem, 0.9rem + 0.6vw, 1.5rem);
+    line-height: 1.35;
+  }
+  .steps {
+    display: grid;
+    gap: 16px;
+    margin-top: clamp(40px, 6vw, 96px);
+  }
+  .step {
+    display: grid;
+    align-content: start;
+    gap: 14px;
+  }
+  .h3 {
+    font-size: var(--fs-h3);
+  }
+  .faq {
+    display: grid;
+    gap: 24px;
+    margin-top: clamp(56px, 8vw, 128px);
+  }
+  .faq-title {
+    max-width: 18ch;
+  }
+  .faq-list {
+    border-top: 1px solid var(--line);
+  }
+  .qa {
+    border-bottom: 1px solid var(--line);
+  }
+  summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 18px 0;
+    min-height: 48px; /* touch target */
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .q {
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.2rem);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .plus {
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: transform var(--dur) var(--ease-out);
+  }
+  .qa[open] .plus {
+    transform: rotate(45deg);
+  }
+  .a {
+    max-width: 62ch;
+    padding-bottom: 20px;
+    line-height: 1.55;
+  }
+  summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  @media (width >= 1024px) {
+    .steps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .faq {
+      grid-template-columns: 4fr 8fr;
+      column-gap: 48px;
+    }
+  }
+</style>
+
+<script>
+  import { wordsIn, riseIn } from '@/scripts/motion';
+  const s = document.getElementById('micros')!;
+  wordsIn(s.querySelector<HTMLElement>('[data-words]')!, 'top 85%', 0.02);
+  riseIn(s.querySelectorAll('[data-rise]'));
+</script>

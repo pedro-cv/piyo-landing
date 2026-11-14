@@ -9,13 +9,18 @@ import Words from '@/components/Words.astro';
 import Game from '@/components/Game.astro';
 import Footer from '@/components/Footer.astro';
 import PixelGrid from '@/components/PixelGrid.astro';
+import Micros from '@/components/Micros.astro';
+import { faqJsonLd, appJsonLd } from '@/data/faq';
+
+const home = new URL(import.meta.env.BASE_URL, Astro.site ?? 'https://piyo.example').toString();
 ---
 
-<Base preloadHero>
+<Base preloadHero jsonLd={[appJsonLd(home), faqJsonLd]}>
   <Header />
   <main>
     <Hero />
     <Manifesto />
+    <Micros />
     <Gallery />
     <PixelGrid from="var(--paper)" to="var(--green-900)" />
     <Contribute />

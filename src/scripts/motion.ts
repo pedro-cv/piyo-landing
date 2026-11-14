@@ -50,6 +50,15 @@ export function scrollTo(target: string | number, duration = 1) {
   else gsap.to(window, { scrollTo: target, duration, ease: 'power2.inOut' });
 }
 
+/** Full text for screen readers while the split spans stay aria-hidden. aria-label is not allowed on p/span/h*
+ * text containers, so the readable copy lives in a visually hidden span instead. */
+function srText(text: string): HTMLElement {
+  const s = document.createElement('span');
+  s.className = 'sr-only';
+  s.textContent = text.trim();
+  return s;
+}
+
 /** Wraps each character in .char (and words in .word so lines wrap naturally). */
 export function splitChars(el: HTMLElement): HTMLElement[] {
   if (el.dataset.split === 'chars') return Array.from(el.querySelectorAll<HTMLElement>('.char'));
@@ -57,7 +66,7 @@ export function splitChars(el: HTMLElement): HTMLElement[] {
   el.textContent = '';
   el.classList.add('split');
   el.dataset.split = 'chars';
-  el.setAttribute('aria-label', text.trim());
+  el.appendChild(srText(text));
   const chars: HTMLElement[] = [];
   text.split(/(\s+)/).forEach((part) => {
     if (!part) return;
@@ -86,7 +95,7 @@ export function splitWordsMasked(el: HTMLElement): HTMLElement[] {
   const text = el.textContent ?? '';
   el.textContent = '';
   el.dataset.split = 'words';
-  el.setAttribute('aria-label', text.trim());
+  el.appendChild(srText(text));
   const words: HTMLElement[] = [];
   text.trim().split(/\s+/).forEach((w, i) => {
     if (i) el.appendChild(document.createTextNode(' '));

@@ -1,7 +1,7 @@
 {
   "name": "piyo",
   "short_name": "piyo",
-  "description": "App libre y sin publicidad para moverse en micro por Santa Cruz de la Sierra.",
+  "description": "Qué micro tomar en Santa Cruz de la Sierra: líneas de micro, recorridos y transbordos. Gratis y sin anuncios.",
   "lang": "es-BO",
   "start_url": ".",
   "display": "browser",

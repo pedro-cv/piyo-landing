@@ -1,0 +1,47 @@
+{
+  "lead": "En Santa Cruz de la Sierra hay más de cien líneas de micro y casi trescientos recorridos. piyo te dice qué micro te lleva de donde estás a donde vas: cuál tomar, dónde subir, dónde bajar y si hace falta un transbordo.",
+  "steps": [
+    {
+      "title": "Marcá a dónde vas",
+      "body": "Tocá el destino en el mapa o buscá la dirección, el barrio o el lugar. Tus viajes de siempre quedan en favoritos."
+    },
+    {
+      "title": "Mirá qué líneas te llevan",
+      "body": "piyo compara las líneas de micro que pasan cerca, directas o con un transbordo, y te muestra el recorrido de ida y vuelta en el mapa."
+    },
+    {
+      "title": "Subí y bajá donde toca",
+      "body": "La app te dice en qué esquina tomar el micro y dónde bajarte, caminando lo menos posible."
+    }
+  ],
+  "faq": [
+    {
+      "q": "¿Qué micro me lleva a mi destino en Santa Cruz?",
+      "a": "Abrí piyo y marcá a dónde vas. La app te muestra las líneas de micro que te llevan, directas o con transbordo, con la esquina para subir y la parada para bajar."
+    },
+    {
+      "q": "¿Cuántas líneas de micro hay en Santa Cruz de la Sierra?",
+      "a": "piyo tiene cargadas 133 líneas de micro con 294 recorridos de ida y vuelta. Las rutas cambian, por eso cualquiera puede reportar un recorrido equivocado desde la app."
+    },
+    {
+      "q": "¿Qué significa ida y vuelta en una línea de micro?",
+      "a": "Son los dos sentidos del recorrido. Muchas líneas no vuelven por las mismas calles, así que piyo muestra cada sentido por separado para que sepas en qué vereda esperar."
+    },
+    {
+      "q": "¿piyo funciona sin internet?",
+      "a": "Sí. Las líneas de micro, el planificador de viajes y tus favoritos funcionan sin conexión. Solo buscar direcciones o bajar mapas nuevos necesita internet."
+    },
+    {
+      "q": "¿Cuánto cuesta piyo?",
+      "a": "Nada. No tiene anuncios, no pide cuenta y no rastrea. Es software libre: el código está en GitHub para que cualquiera lo revise o lo mejore."
+    },
+    {
+      "q": "¿Los recorridos de los micros son exactos?",
+      "a": "Son referenciales. Un micro puede desviarse por obras, tráfico o cambios del servicio. Si ves un recorrido mal, reportalo o dibujá la ruta correcta desde la app."
+    },
+    {
+      "q": "¿Dónde descargo piyo?",
+      "a": "piyo es para Android y llega pronto a Google Play. Mientras tanto podés seguir el proyecto en GitHub."
+    }
+  ]
+}

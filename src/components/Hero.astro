@@ -18,19 +18,23 @@ const hero = {
   <div class="veil" aria-hidden="true"></div>
 
   <div class="content wrap">
-    <p class="label kicker" data-rise>App libre · Santa Cruz de la Sierra</p>
-    <h1 class="display title" data-hero-title>piyo</h1>
+    <!-- The H1 carries the search phrase (kicker) and the wordmark; both are visible. -->
+    <h1 class="h1">
+      <span class="label kicker" data-rise>Rutas y líneas de micro en Santa Cruz de la Sierra</span>
+      <span class="display title" data-hero-title>piyo</span>
+    </h1>
     <div class="row">
       <p class="tagline display" data-hero-tagline>{site.tagline}</p>
       <div class="copy">
-        <p class="lead" data-rise>{site.description}</p>
+        <!-- No fade-in here: this paragraph is the LCP element on phones, hiding it delayed LCP by ~1.8 s. -->
+        <p class="lead">{site.description}</p>
         <div class="ctas" data-rise>
-          <a class="btn btn--paper" href={site.repos.app.url} target="_blank" rel="noopener">
-            <span class="btn-label"><span>Aportar a la app</span><span aria-hidden="true">Aportar a la app</span></span>
-            <span class="btn-arrow" aria-hidden="true">↗</span>
+          <a class="btn btn--paper" href="#micros" data-scroll>
+            <span class="btn-label"><span>Qué micro me lleva</span><span aria-hidden="true">Qué micro me lleva</span></span>
+            <span class="btn-arrow" aria-hidden="true">↓</span>
           </a>
-          <a class="btn" href={site.repos.backend.url} target="_blank" rel="noopener">
-            <span class="btn-label"><span>Aportar al backend</span><span aria-hidden="true">Aportar al backend</span></span>
+          <a class="btn" href={site.repos.app.url} target="_blank" rel="noopener">
+            <span class="btn-label"><span>Aportar en GitHub</span><span aria-hidden="true">Aportar en GitHub</span></span>
             <span class="btn-arrow" aria-hidden="true">↗</span>
           </a>
         </div>
@@ -41,9 +45,10 @@ const hero = {
   <ul class="index wrap" aria-label="Índice">
     {[
       ['01', 'Qué es', '#que-es'],
-      ['02', 'Aportá', '#aporta'],
-      ['03', 'Palabras', '#palabras'],
-      ['04', 'Jugá', '#juga'],
+      ['02', 'Qué micro', '#micros'],
+      ['03', 'Aportá', '#aporta'],
+      ['04', 'Palabras', '#palabras'],
+      ['05', 'Jugá', '#juga'],
     ].map(([n, l, h]) => (
       <li><a href={h} data-scroll><span class="muted">({n})</span> <span class="label">{l}</span></a></li>
     ))}
@@ -87,6 +92,10 @@ const hero = {
     padding-top: clamp(96px, 16vh, 160px);
     padding-bottom: clamp(24px, 4vh, 48px);
     align-self: end;
+  }
+  .h1 {
+    display: grid;
+    font-weight: inherit;
   }
   .kicker {
     margin-bottom: 1rem;
@@ -163,7 +172,7 @@ const hero = {
       max-width: 520px;
     }
     .index {
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(6, 1fr);
     }
     .cue {
       display: inline-flex;

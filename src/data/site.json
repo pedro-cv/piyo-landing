@@ -99,7 +99,8 @@
   ],
   "licenses": {
     "code": "GPL-3.0-or-later",
-    "map": "Datos de mapa © OpenStreetMap contributors (ODbL)"
+    "map": "Datos de mapa © OpenStreetMap contributors (ODbL)",
+    "routes": "Recorridos de micro: Microcruz, con correcciones de la comunidad de piyo"
   },
   "playStore": {
     "url": "",

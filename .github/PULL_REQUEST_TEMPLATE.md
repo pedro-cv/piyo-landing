@@ -21,6 +21,6 @@
 ## Checklist
 
 - [ ] No secrets, tokens or personal data in the diff
-- [ ] No new analytics, trackers, ads or third-party scripts
+- [ ] No new analytics, trackers, ads or third-party scripts (the GA4 tag in `Base.astro`, disclosed in `/privacidad`, is the only one)
 - [ ] UI copy in Spanish with voseo ("Probá", "Elegí"); new words have meaning_es, translation_en and a source
 - [ ] Images I added are mine or have a licence that allows reuse, and are credited in `src/data/site.json`

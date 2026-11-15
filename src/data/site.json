@@ -2,6 +2,9 @@
   "name": "piyo",
   "tagline": "El micro, sin vueltas.",
   "description": "Qué micro tomar en Santa Cruz de la Sierra: 133 líneas de micro, recorridos de ida y vuelta y transbordos. App gratis, sin anuncios y sin internet.",
+  "analytics": {
+    "ga4": "G-FLX8MZBSJ8"
+  },
   "seo": {
     "title": "Micros en Santa Cruz: rutas y líneas de micro | piyo",
     "ogAlt": "piyo, la app para saber qué micro tomar en Santa Cruz de la Sierra"
@@ -59,7 +62,7 @@
     },
     {
       "value": "0",
-      "label": "anuncios, cuentas o rastreo"
+      "label": "anuncios ni cuentas"
     }
   ],
   "images": [

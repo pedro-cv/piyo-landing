@@ -21,6 +21,9 @@ const og = hasSite ? new URL(`${base}og.jpg`, origin).toString() : null;
 const path = Astro.url.pathname.replace(/index\.html$/, '').replace(/(.)\/$/, '$1');
 const canonical = hasSite ? new URL(path, origin).toString() : null;
 const home = hasSite ? new URL(base, origin).toString() : null;
+// Google Analytics 4 for the website only (the app has none). Production builds on the real domain only,
+// so local dev, forks and preview builds without PUBLIC_SITE never send data. Disclosed in /privacidad.
+const ga4 = hasSite && import.meta.env.PROD ? site.analytics.ga4 : null;
 const graph = home
   ? [
       {
@@ -75,6 +78,21 @@ const graph = home
     <meta name="twitter:card" content={og ? "summary_large_image" : "summary"} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    {ga4 && (
+      <script is:inline define:vars={{ ga4 }}>
+        // gtag.js is fetched after the load event so it never competes with the hero for bandwidth or CPU.
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', ga4);
+        window.addEventListener('load', function () {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ga4;
+          document.head.appendChild(s);
+        });
+      </script>
+    )}
     {graph.length > 0 && <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c')} />}
     {preloadHero && (
       <>

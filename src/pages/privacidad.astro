@@ -1,6 +1,7 @@
 ---
 // Privacy policy linked from the Google Play listing. Source of truth: piyo-app
 // docs/implementation/PRIVACY.md. When the app starts storing or sending something new, update both.
+// Exception: the "La página web" section (Google Analytics on this site) exists only here.
 import Legal from '@/layouts/Legal.astro';
 import site from '@/data/site.json';
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
@@ -10,14 +11,15 @@ const mailto = `mailto:${email}?subject=${encodeURIComponent('Privacidad en piyo
 
 <Legal
   title="Política de privacidad · piyo"
-  description="Qué datos usa la app piyo, dónde quedan y cómo borrarlos. Sin cuentas, sin publicidad y sin rastreo."
+  description="Qué datos usa la app piyo, dónde quedan y cómo borrarlos. Sin cuentas y sin publicidad."
   heading="Política de privacidad"
-  updated="11 de noviembre de 2026"
+  updated="14 de noviembre de 2026"
 >
   <p>
-    piyo es una app libre y sin publicidad para moverse en micro por Santa Cruz de la Sierra. No tiene cuentas,
-    no muestra anuncios y no usa herramientas de analítica ni de rastreo. Esta política explica qué datos usa la
-    app, dónde quedan y cómo podés borrarlos.
+    piyo es una app libre y sin publicidad para moverse en micro por Santa Cruz de la Sierra. La app no tiene
+    cuentas, no muestra anuncios y no usa herramientas de analítica ni de rastreo. Esta política explica qué datos
+    usa la app, dónde quedan y cómo podés borrarlos. Esta página web sí usa Google Analytics: lo explicamos en
+    <a href="#pagina-web">La página web</a>.
   </p>
   <p class="note">
     En corto: casi todo queda en tu teléfono. Solo mandamos algo a nuestro servidor cuando vos enviás un reporte,
@@ -149,6 +151,22 @@ const mailto = `mailto:${email}?subject=${encodeURIComponent('Privacidad en piyo
   <p>
     No vendemos ni compartimos tus datos con nadie para publicidad ni para ningún otro fin. Sin conexión, piyo planea
     viajes con los datos que ya tiene y no se comunica con nadie.
+  </p>
+
+  <h2 id="pagina-web">La página web</h2>
+  <p>
+    Lo de arriba es sobre la app. Esta página web ({Astro.site?.host ?? 'piyo'}) usa
+    <strong>Google Analytics 4</strong> para saber cuánta gente la visita, desde qué búsquedas llega y qué enlaces
+    toca (por ejemplo, los de GitHub o Google Play). Con eso decidimos qué mejorar.
+  </p>
+  <ul>
+    <li>Google Analytics guarda cookies propias (<code>_ga</code> y <code>_ga_*</code>) en tu navegador y recibe tu dirección IP, el tipo de navegador y dispositivo, la página que ves y de dónde llegaste. Según Google, Analytics 4 no registra ni guarda direcciones IP.</li>
+    <li>No mandamos a Google tu nombre, correo ni ningún dato que te identifique, y no usamos esos datos para publicidad.</li>
+    <li>La app no usa Google Analytics: nada de lo que hacés en la app llega a esta herramienta.</li>
+    <li>Para no ser contado, bloqueá las cookies de este sitio, usá un bloqueador de rastreo o instalá el <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">complemento de inhabilitación de Google Analytics ↗</a>.</li>
+  </ul>
+  <p>
+    Ver la <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">explicación de Google sobre cómo usa los datos de los sitios que usan sus servicios ↗</a>.
   </p>
 
   <h2>Cuánto tiempo guardamos los datos</h2>

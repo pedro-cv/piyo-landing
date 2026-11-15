@@ -14,10 +14,22 @@
       "body": "La app te dice en qué esquina tomar el micro y dónde bajarte, caminando lo menos posible."
     }
   ],
+  "guide": {
+    "title": "Cómo moverte en micro por Santa Cruz",
+    "paragraphs": [
+      "Santa Cruz de la Sierra crece en anillos y radiales, y los micros los cruzan casi todos. Cada línea de micro tiene su número y su color, y hace un recorrido de ida y otro de vuelta que no siempre pasa por las mismas calles. Por eso la pregunta de siempre es «¿qué micro me lleva a…?».",
+      "Con piyo escribís a dónde vas (el centro, el Plan 3000, la Terminal Bimodal, la UAGRM o el Ventura Mall) y la app busca las líneas de micro que te dejan cerca, directas o con un transbordo. Así no te quedás como piyo contra el cerco, esperando un micro que no pasa por ahí.",
+      "Las rutas de micro cambian con obras y desvíos. Cuando una línea cambia su recorrido, cualquiera puede reportarlo o dibujarlo de nuevo desde la app, y la corrección llega a todos con la próxima actualización de datos."
+    ]
+  },
   "faq": [
     {
       "q": "¿Qué micro me lleva a mi destino en Santa Cruz?",
       "a": "Abrí piyo y marcá a dónde vas. La app te muestra las líneas de micro que te llevan, directas o con transbordo, con la esquina para subir y la parada para bajar."
+    },
+    {
+      "q": "¿Qué es piyo?",
+      "a": "piyo es una app gratis para Android que te dice qué micro tomar en Santa Cruz de la Sierra. Tiene las líneas de micro con sus recorridos de ida y vuelta, planea viajes con transbordos y funciona sin internet. Es de código abierto y no tiene anuncios."
     },
     {
       "q": "¿Cuántas líneas de micro hay en Santa Cruz de la Sierra?",
@@ -42,6 +54,11 @@
     {
       "q": "¿Dónde descargo piyo?",
       "a": "piyo es para Android y llega pronto a Google Play. Mientras tanto podés seguir el proyecto en GitHub."
+    },
+    {
+      "q": "¿Por qué se llama piyo?",
+      "a": "Piyo (o piyu) es como se le dice en camba al ñandú, el ave corredora de las pampas cruceñas. Corre rápido y sabe a dónde va. Y hay un dicho: quedarse «como piyo contra el cerco» es estar perdido, sin saber qué hacer. La app está para que eso no te pase con el micro.",
+      "more": { "href": "palabras", "label": "Más palabras en el diccionario camba" }
     }
   ]
 }
